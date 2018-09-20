@@ -110,7 +110,7 @@ public class LoaderCSV {
 		 * 8 = site
 		 */
 		try{
-			System.out.println("Caminnho CSV" + caminhoCSV);
+			
 			
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
@@ -125,20 +125,20 @@ public class LoaderCSV {
 				else{
 					String data = leitorLinhas[0].trim();
 					String imgUrl= leitorLinhas[1].trim();
-					String codvalidacao = leitorLinhas[2].trim();
+					String codvalidacao = checkCamp(leitorLinhas[2].trim());
 					String nomeCidade = leitorLinhas[3].trim();
-					String descricao = leitorLinhas[4].trim();
-					String area = leitorLinhas[5].trim();
-					String latitude = leitorLinhas[6].trim();
-					String longitude = leitorLinhas[7].trim();
+					String descricao = checkCamp(leitorLinhas[4].trim());
+					String area = checkLatLong(leitorLinhas[5].trim());
+					String latitude = checkLatLong(leitorLinhas[6].trim());
+					String longitude = checkLatLong(leitorLinhas[7].trim());
 					String estado = leitorLinhas[8].trim();
 					String populacao = leitorLinhas[9].trim();
 					String site = leitorLinhas[10].trim();
-					String inf_relevante = leitorLinhas[11].trim();
+					String inf_relevante = checkCamp(leitorLinhas[11].trim());
 					String email_responsavel = leitorLinhas[12].trim();
 					String nome_responsavel = leitorLinhas[13].trim();
 					String contato_responsavel = leitorLinhas[14].trim();
-					String fonte_inf = leitorLinhas[15].trim();
+					String fonte_inf = checkCamp(leitorLinhas[15].trim());
 			
 		
 					
@@ -166,18 +166,18 @@ public class LoaderCSV {
 					String imgUrl=retireAspas(leitorLinhas[1].trim());
 					String codValidacao = retireAspas(leitorLinhas[2].trim());
 					String nomeCidade = retireAspas(leitorLinhas[1].trim());
-					String descricao = retireAspas(leitorLinhas[2].trim());
-					String area = retireAspas(leitorLinhas[3].trim());
-					String latitude = retireAspas(leitorLinhas[4].trim());
-					String longitude = retireAspas(leitorLinhas[5].trim());
+					String descricao = checkCamp(retireAspas(leitorLinhas[2].trim()));
+					String area = checkLatLong(retireAspas(leitorLinhas[3].trim()));
+					String latitude = checkLatLong(retireAspas(leitorLinhas[4].trim()));
+					String longitude = checkLatLong(retireAspas(leitorLinhas[5].trim()));
 					String estado = retireAspas(leitorLinhas[6].trim());
 					String populacao = retireAspas(leitorLinhas[7].trim());
 					String site = retireAspas(leitorLinhas[8]);
-					String inf_relevante = retireAspas(leitorLinhas[9].trim());
+					String inf_relevante = checkCamp(retireAspas(leitorLinhas[9].trim()));
 					String email_responsavel = retireAspas(leitorLinhas[10].trim());
 					String nome_responsavel = retireAspas(leitorLinhas[11].trim());
 					String contato_responsavel = retireAspas(leitorLinhas[12].trim());
-					String fonte_inf = retireAspas(leitorLinhas[13].trim());
+					String fonte_inf = checkCamp(retireAspas(leitorLinhas[13].trim()));
 			
 		
 					
@@ -272,7 +272,7 @@ public class LoaderCSV {
 						String codValidacao =  retireAspas(leitorLinhas[1].trim());
 						String nomeAtrativo =  retireAspas(leitorLinhas[2].trim());
 						String comoChegar =  retireAspas(leitorLinhas[3].trim());
-						String descricao =  retireAspas(leitorLinhas[4].trim());
+						String descricao =  checkCamp(retireAspas(leitorLinhas[4].trim()));
 						String infContato =  retireAspas(leitorLinhas[5].trim());
 						double latitude = Double.parseDouble( retireAspas(leitorLinhas[6].trim()));
 						double longitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
@@ -469,7 +469,7 @@ public class LoaderCSV {
 		while(m.find()) {
 			aux+=m.group();
 		}
-		//System.out.println("aux: " + aux);
+		System.out.println("aux: " + aux);
 		return aux;
 	}
 	
@@ -482,12 +482,17 @@ public class LoaderCSV {
 		 * exemplo 3 longitude: 47,1723923
 		 * 
 		 */
+		System.out.println(lat);
+		String normal = lat;
 		String[] saida = lat.split(",");
+		if(saida.length>1) {
+			String op = saida[0]+"."+saida[1];
+			//System.out.println(op);
+			return op;
+		}
+		return normal;
 		
 		
-		String op = saida[0]+"."+saida[1];
-		//System.out.println(op);
-		return op;
 	}
 	
 	public String retireAspas(String string){

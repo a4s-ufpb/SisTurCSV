@@ -47,9 +47,8 @@ public class Execute {
 		System.out.println("Obs: Nome dos arquivos csv DEVEM SER 'municipios.csv' ou 'atrativoTuristico.csv' ");
 		
 		
-		LoaderCSV loader_atrativo = new LoaderCSV();
-		loader_atrativo.checkLatLong("-4,55544");
-		loader_atrativo.checkCamp("EU TINHA, DOIS PATINHOS QUE FORAM COMPRADOS POR 17283 CARROS");
+		pegaCaminho();
+		
 		
 		
 
