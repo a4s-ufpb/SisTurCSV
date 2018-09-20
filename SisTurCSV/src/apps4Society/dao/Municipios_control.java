@@ -70,7 +70,7 @@ public class Municipios_control {
 	public void addMunicipio(Municipios municipios) throws ClassNotFoundException, SQLException{
 		
 		if(verificaDados(municipios)){
-			System.err.println("dado ja add");
+			System.err.println("dado ja add: "+ municipios.getNomecidade());
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();

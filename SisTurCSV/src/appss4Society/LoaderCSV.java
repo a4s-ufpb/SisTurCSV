@@ -10,6 +10,8 @@ import apps4Society.model.AtrativoTuristico;
 import java.util.ArrayList;
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
+
+import Interf.Loggers_z;
 import apps4Society.model.Praia;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,13 +21,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
 
-public class LoaderCSV {
+public class LoaderCSV implements Loggers_z{
+	
 	private static ArrayList<Municipios> list_mun =  new ArrayList<Municipios>();
 	private static ArrayList<AtrativoTuristico> list_atrativos = new ArrayList<AtrativoTuristico>();
 	private static ArrayList<Praia> list_praias = new ArrayList<Praia>();
 	
+	/*
+	 * Gerenciador de Logs!
+	 */
+	private final Logger slf4jLogger = LoggerFactory.getLogger(LoaderCSV.class);
+	
 	public LoaderCSV(){
 		//list_mun = new ArrayList<Municipios>();
+		
+		
 	}
 	/*
 	 * Problemas a serem resolvidos qualquer valor diferente do indice especificado , tera seu valor no banco trocado
@@ -51,6 +61,26 @@ public class LoaderCSV {
 		
 		
 	
+	}
+	
+	@Override
+	public  void paths(String name) {
+		// TODO Auto-generated method stub
+		slf4jLogger.info("Path selecionado: " + name);
+		
+	}
+	@Override
+	public void arqs(String aqs) {
+		// TODO Auto-generated method stub
+		slf4jLogger.info("Arquivo txt Criado: " + aqs);
+	}
+	
+	@Override
+	public void inputs(String variaveis) {
+		// TODO Auto-generated method stub
+		slf4jLogger.info("Conteudo da Variavel: " + variaveis);
+		
+		
 	}
 	
 	
@@ -111,34 +141,92 @@ public class LoaderCSV {
 		 */
 		try{
 			
+			paths(caminhoCSV);
 			
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
+			String data = "";
+			String imgUrl= "";
+			String codvalidacao = "";
+			String nomeCidade = "";
+			String descricao = "";
+			String area = "";
+			String latitude = "";
+			String longitude = "";
+			String estado = "";
+			String populacao = "";
+			String site = "";
+			String inf_relevante = "";
+			String email_responsavel = "";
+			String nome_responsavel = "";
+			String contato_responsavel = "";
+			String fonte_inf = "";
 			
 			while((leitorLinhas=leitor.readNext()) != null){
 				int x = leitorLinhas.length -1;
 				
-				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[5].isEmpty() || leitorLinhas[7].isEmpty()){
-					System.out.println("Preencha os dados corretamente/1");	
+				if(leitorLinhas[0].isEmpty()) {
+					data="Data nao informada!";
+				}else if(leitorLinhas[1].isEmpty()) {
+					imgUrl = "Url nao informada!";
+				}else if(leitorLinhas[2].isEmpty()) {
+					codvalidacao="Codigo de Validacao nao informado";
+				}else if(leitorLinhas[3].isEmpty()) {
+					nomeCidade="Nome do municipio nao informado";
+				}
+				else if(leitorLinhas[4].isEmpty()) {
+					descricao=" Descricao do municipio nao informado";
+				}
+				else if(leitorLinhas[5].isEmpty()) {
+					area="Area do municipio nao informado";
+				}
+				else if(leitorLinhas[6].isEmpty()) {
+					latitude="Latitude do municipio nao informado";
+				}
+				else if(leitorLinhas[7].isEmpty()) {
+					longitude="Longitude do municipio nao informado";
+				}
+				else if(leitorLinhas[8].isEmpty()) {
+					estado="Estado do municipio nao informado";
+				}
+				else if(leitorLinhas[9].isEmpty()) {
+					populacao="Populacao do municipio nao informado";
+				}
+				else if(leitorLinhas[10].isEmpty()) {
+					site="Site do municipio nao informado";
+				}else if(leitorLinhas[11].isEmpty()) {
+					inf_relevante="Informacoes Relevantes do municipio nao informado";
+				}
+				else if(leitorLinhas[12].isEmpty()) {
+					email_responsavel="Email do Responsavel pelo preenchimento nao informado";
+				}
+				else if(leitorLinhas[13].isEmpty()) {
+					nome_responsavel="Nome do Responsavel pelo preenchimento nao informado";
+				}
+				else if(leitorLinhas[14].isEmpty()) {
+					contato_responsavel="contato do Responsavel pelo preenchimento nao informado";
+				}
+				else if(leitorLinhas[15].isEmpty()) {
+					fonte_inf="Fonte de informacoes  do municipio nao informado";
 				}
 				else{
-					String data = leitorLinhas[0].trim();
-					String imgUrl= leitorLinhas[1].trim();
-					String codvalidacao = checkCamp(leitorLinhas[2].trim());
-					String nomeCidade = leitorLinhas[3].trim();
-					String descricao = checkCamp(leitorLinhas[4].trim());
-					String area = checkLatLong(leitorLinhas[5].trim());
-					String latitude = checkLatLong(leitorLinhas[6].trim());
-					String longitude = checkLatLong(leitorLinhas[7].trim());
-					String estado = leitorLinhas[8].trim();
-					String populacao = leitorLinhas[9].trim();
-					String site = leitorLinhas[10].trim();
-					String inf_relevante = checkCamp(leitorLinhas[11].trim());
-					String email_responsavel = leitorLinhas[12].trim();
-					String nome_responsavel = leitorLinhas[13].trim();
-					String contato_responsavel = leitorLinhas[14].trim();
-					String fonte_inf = checkCamp(leitorLinhas[15].trim());
+					 data = leitorLinhas[0].trim();
+					 imgUrl= leitorLinhas[1].trim();
+					 codvalidacao = checkCamp(leitorLinhas[2].trim());
+					 nomeCidade = leitorLinhas[3].trim();
+					 descricao = checkCamp(leitorLinhas[4].trim());
+					 area = checkLatLong(leitorLinhas[5].trim());
+					 latitude = checkLatLong(leitorLinhas[6].trim());
+					 longitude = checkLatLong(leitorLinhas[7].trim());
+					 estado = leitorLinhas[8].trim();
+					 populacao = leitorLinhas[9].trim();
+					 site = leitorLinhas[10].trim();
+					 inf_relevante = checkCamp(leitorLinhas[11].trim());
+					 email_responsavel = leitorLinhas[12].trim();
+					 nome_responsavel = leitorLinhas[13].trim();
+					 contato_responsavel = leitorLinhas[14].trim();
+					 fonte_inf = checkCamp(leitorLinhas[15].trim());
 			
 		
 					
@@ -153,35 +241,92 @@ public class LoaderCSV {
 			
 				@SuppressWarnings("deprecation")
 				CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
-				String[] leitorLinhas;
-			
+				String[] leitorLinhas; 
+				String data = ""; // 0
+				String imgUrl= ""; // 1
+				String codvalidacao = ""; // 2
+				String nomeCidade = ""; // 3
+				String descricao = ""; // 4
+				String area = ""; // 5
+				String latitude = ""; // 6
+				String longitude = ""; // 7
+				String estado = ""; // 8
+				String populacao = ""; // 9
+				String site = ""; // 10
+				String inf_relevante = ""; // 11
+				String email_responsavel = ""; // 12
+				String nome_responsavel = ""; // 13
+				String contato_responsavel = ""; // 14
+				String fonte_inf = ""; // 15
+				
 				while((leitorLinhas=leitor.readNext()) != null){
 				int x = leitorLinhas.length -1;
 				
-				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[5].isEmpty() || leitorLinhas[7].isEmpty()){
-					System.out.println("Preencha os dados corretamente/1");	
+				if(leitorLinhas[0].isEmpty()) {
+					data="Data nao informada!";
+				}else if(leitorLinhas[1].isEmpty()) {
+					imgUrl = "Url nao informada!";
+				}else if(leitorLinhas[2].isEmpty()) {
+					codvalidacao="Codigo de Validacao nao informado";
+				}else if(leitorLinhas[3].isEmpty()) {
+					nomeCidade="Nome do municipio nao informado";
+				}
+				else if(leitorLinhas[4].isEmpty()) {
+					descricao=" Descricao do municipio nao informado";
+				}
+				else if(leitorLinhas[5].isEmpty()) {
+					area="Area do municipio nao informado";
+				}
+				else if(leitorLinhas[6].isEmpty()) {
+					latitude="Latitude do municipio nao informado";
+				}
+				else if(leitorLinhas[7].isEmpty()) {
+					longitude="Longitude do municipio nao informado";
+				}
+				else if(leitorLinhas[8].isEmpty()) {
+					estado="Estado do municipio nao informado";
+				}
+				else if(leitorLinhas[9].isEmpty()) {
+					populacao="Populacao do municipio nao informado";
+				}
+				else if(leitorLinhas[10].isEmpty()) {
+					site="Site do municipio nao informado";
+				}else if(leitorLinhas[11].isEmpty()) {
+					inf_relevante="Informacoes Relevantes do municipio nao informado";
+				}
+				else if(leitorLinhas[12].isEmpty()) {
+					email_responsavel="Email do Responsavel pelo preenchimento nao informado";
+				}
+				else if(leitorLinhas[13].isEmpty()) {
+					nome_responsavel="Nome do Responsavel pelo preenchimento nao informado";
+				}
+				else if(leitorLinhas[14].isEmpty()) {
+					contato_responsavel="contato do Responsavel pelo preenchimento nao informado";
+				}
+				else if(leitorLinhas[15].isEmpty()) {
+					fonte_inf="Fonte de informacoes  do municipio nao informado";
 				}
 				else{
-					String data = retireAspas(leitorLinhas[0].trim());
-					String imgUrl=retireAspas(leitorLinhas[1].trim());
-					String codValidacao = retireAspas(leitorLinhas[2].trim());
-					String nomeCidade = retireAspas(leitorLinhas[1].trim());
-					String descricao = checkCamp(retireAspas(leitorLinhas[2].trim()));
-					String area = checkLatLong(retireAspas(leitorLinhas[3].trim()));
-					String latitude = checkLatLong(retireAspas(leitorLinhas[4].trim()));
-					String longitude = checkLatLong(retireAspas(leitorLinhas[5].trim()));
-					String estado = retireAspas(leitorLinhas[6].trim());
-					String populacao = retireAspas(leitorLinhas[7].trim());
-					String site = retireAspas(leitorLinhas[8]);
-					String inf_relevante = checkCamp(retireAspas(leitorLinhas[9].trim()));
-					String email_responsavel = retireAspas(leitorLinhas[10].trim());
-					String nome_responsavel = retireAspas(leitorLinhas[11].trim());
-					String contato_responsavel = retireAspas(leitorLinhas[12].trim());
-					String fonte_inf = checkCamp(retireAspas(leitorLinhas[13].trim()));
+					data = retireAspas(leitorLinhas[0].trim());
+					 imgUrl=retireAspas(leitorLinhas[1].trim());
+					 codvalidacao = retireAspas(leitorLinhas[2].trim());
+					 nomeCidade = retireAspas(leitorLinhas[1].trim());
+					 descricao = checkCamp(retireAspas(leitorLinhas[2].trim()));
+					 area = checkLatLong(retireAspas(leitorLinhas[3].trim()));
+					 latitude = checkLatLong(retireAspas(leitorLinhas[4].trim()));
+					 longitude = checkLatLong(retireAspas(leitorLinhas[5].trim()));
+					 estado = retireAspas(leitorLinhas[6].trim());
+					 populacao = retireAspas(leitorLinhas[7].trim());
+					 site = retireAspas(leitorLinhas[8]);
+					 inf_relevante = checkCamp(retireAspas(leitorLinhas[9].trim()));
+					 email_responsavel = retireAspas(leitorLinhas[10].trim());
+					 nome_responsavel = retireAspas(leitorLinhas[11].trim());
+					 contato_responsavel = retireAspas(leitorLinhas[12].trim());
+					 fonte_inf = checkCamp(retireAspas(leitorLinhas[13].trim()));
 			
 		
 					
-					list_mun.add(new Municipios(data,imgUrl,codValidacao,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
+					list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
 					
 					
 				}
@@ -214,6 +359,8 @@ public class LoaderCSV {
 		 * 7 = site;
 		 */
 		try {
+			paths(caminhoCSV);
+			
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			while((leitorLinhas=leitor.readNext())!=null){
@@ -369,6 +516,7 @@ public class LoaderCSV {
 			
 			
 			
+			
 			File file = new File(caminhoCSV+"/"+"LOG_ATRATIVOS_TURISTICOS.txt"); // quebra de linha \r\n
 			String dados_turismo = "";
 			String conteudo;
@@ -402,7 +550,7 @@ public class LoaderCSV {
 			arq.write("\r\n");
 			arq.write("Armazenados com sucesso!");
 			arq.close();
-
+			paths("Arquivo atrativos.txt criado com sucesso!");
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
@@ -454,6 +602,7 @@ public class LoaderCSV {
 			arq.write("Quantidade de Municipios Armazenados: " + lenListaCity);
 			arq.write("\r\n");
 			arq.write("Armazenados com sucesso!");
+			arqs("municipios.txt");
 			arq.close();
 
 		} catch (IOException e) {
@@ -469,7 +618,7 @@ public class LoaderCSV {
 		while(m.find()) {
 			aux+=m.group();
 		}
-		System.out.println("aux: " + aux);
+		
 		return aux;
 	}
 	
@@ -482,7 +631,7 @@ public class LoaderCSV {
 		 * exemplo 3 longitude: 47,1723923
 		 * 
 		 */
-		System.out.println(lat);
+	
 		String normal = lat;
 		String[] saida = lat.split(",");
 		if(saida.length>1) {
@@ -532,4 +681,18 @@ public class LoaderCSV {
 		return x;
 	
 	}
+
+	@Override
+	public void sucess(String msg_sucess) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void error(String msg_error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

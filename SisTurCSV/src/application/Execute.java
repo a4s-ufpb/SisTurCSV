@@ -11,6 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import Interf.Loggers_z;
 import apps4Society.dao.AtrativoTuristico_control;
 import apps4Society.dao.Municipios_control;
 import apps4Society.dao.Praia_control;
@@ -25,7 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import java.util.Scanner;
 
-public class Execute {
+public class Execute implements Loggers_z{
 
 	private static ArrayList<Municipios> lista_municipios = new ArrayList<Municipios>();
 	private static ArrayList<AtrativoTuristico> lista_Atrativo = new ArrayList<AtrativoTuristico>();
@@ -33,6 +37,14 @@ public class Execute {
 	
 	private static String caminho;
 	private static String path_log;
+	
+	/*
+	 * Gerenciador de Logs!
+	 */
+	private final static Logger slf4jLogger = LoggerFactory.getLogger(Execute.class);
+	
+	
+	
 	
 	
 	public static void main(String args[]) {
@@ -47,14 +59,39 @@ public class Execute {
 		System.out.println("Obs: Nome dos arquivos csv DEVEM SER 'municipios.csv' ou 'atrativoTuristico.csv' ");
 		
 		
+	
 		pegaCaminho();
+		
 		
 		
 		
 
 	}
-	
-	
+	@Override
+	public void paths(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void arqs(String arqs) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void inputs(String variaveis) {
+		// TODO Auto-generated method stub
+		
+	}
+	public static void su(String msg_sucess) {
+		slf4jLogger.info("Dados inseridos com sucesso Tipo: "  + msg_sucess);
+	}
+	public static void er(String msg_error) {
+		slf4jLogger.info("Error, Tipo: "  + msg_error);
+	}
 	public static void pegaCaminho() {
 		
 		Scanner obj_entrada = new Scanner(System.in);
@@ -164,12 +201,23 @@ public class Execute {
 			for(int i =0 ; i<lista_municipios.size();i++){
 				n.addMunicipio(lista_municipios.get(i));
 			}
-			JOptionPane.showMessageDialog(null, "Dados do tipo Municipios foram inseridos");
+			su("Municipios");
 			lista_municipios.clear();
 		}else {
-			JOptionPane.showMessageDialog(null, "Erro no carregamento CSV ATRATIVOS TURISTICOS");
+			er("Municipio CSV");
 		}
 		
 	}
+	@Override
+	public void sucess(String msg_sucess) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void error(String msg_error) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
