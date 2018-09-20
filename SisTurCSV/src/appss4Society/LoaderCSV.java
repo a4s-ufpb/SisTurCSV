@@ -12,6 +12,9 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
 import apps4Society.model.Praia;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.slf4j.Logger;	
 import org.slf4j.LoggerFactory;
 import java.io.File;
@@ -107,6 +110,7 @@ public class LoaderCSV {
 		 * 8 = site
 		 */
 		try{
+			System.out.println("Caminnho CSV" + caminhoCSV);
 			
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
@@ -383,7 +387,7 @@ public class LoaderCSV {
 			arq.write("\r\n");
 			for (int i = 0; i < list.size(); i++) {
 
-				dados_turismo = "Nome do Atrativo Turistico: " + list.get(i).getNome_atrativo() + "\r\n" + "Como chegar: " + list.get(i).getComoChegar()
+				dados_turismo = "Nome do Atrativo Turistico: " + list.get(i).getNome_atrativo() + "\r\n" + "Como chegar: " + list.get(i).getComochegar()
 						+ "\r\n" + "Descricao: " + list.get(i).getDescricao()+"\r\n"+"Informacoes Relevantes: "+list.get(i).getInformacoes_relevantes() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
 						+ "\r\n" + "Longitude: " + list.get(i).getLongitude()+"\r\n"+"Data: "+list.get(i).getDate()+"\r\n"+"Nome do Responsavel pelo Atrativo: "+list.get(i).getNome_responsavel_atrativo()+ "\r\n" + "Email Atrativo Turistico: "+list.get(i).getEmail_responsavel_atrativo()+"\r\n" + "Codigo de Validacao: "+list.get(i).getCodValidacao() + "\r\n" + "InfomaÃƒÂ§ÃƒÂ£o Contato: " + list.get(i).getInfoContato() +
 						"\r\n" + "Site: " + list.get(i).getSite() + "\r\n" + "Cidade do Atrativo: "+list.get(i).getCidade()+"\r\n"+"Estado do Atrativo: "+list.get(i).getEstado()+"\r\n"+"Email do responsavel pelo preenchimento: "+list.get(i).getEmail_responsavel_preenchimento()+"\r\n"+"Nome do responsavel pelo preenchimento: "+list.get(i).getNome_responsavel_preenchimento()+"\r\n"+"Contato Responsavel pelo preenchimento: "+list.get(i).getContato_responsavel_preenchimento()+"\r\n"+"----------------------------------------------------------------------------------------------------------------" + "\r\n";
@@ -455,6 +459,35 @@ public class LoaderCSV {
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
+	}
+	
+	public String checkCamp(String qualquerCampo) {
+		String aux = "";
+		Pattern padrao = Pattern.compile("[a-z A-Z à-ú À-Ú 0-9]+");
+		Matcher m = padrao.matcher(qualquerCampo);
+		int i = 1;
+		while(m.find()) {
+			aux+=m.group();
+		}
+		//System.out.println("aux: " + aux);
+		return aux;
+	}
+	
+	public String checkLatLong(String lat) {
+		/*
+		 * trata os campos de populacao,lattitude e longitude
+		 * caso o usuario digite virgula
+		 * exemplo 1 populacao: 44,444
+		 * exemplo 2 latitude; -4,389230
+		 * exemplo 3 longitude: 47,1723923
+		 * 
+		 */
+		String[] saida = lat.split(",");
+		
+		
+		String op = saida[0]+"."+saida[1];
+		//System.out.println(op);
+		return op;
 	}
 	
 	public String retireAspas(String string){

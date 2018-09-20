@@ -9,6 +9,44 @@ import java.sql.SQLException;
 public class AtrativoTuristico_control {
 	
 	
+	
+	public void createTableAtrativo() throws ClassNotFoundException, SQLException {
+		/*
+		 * Responsavel por criar a tabela de atrativos no postgresql
+		 * se a mesma nao existir
+		*/
+		Connection con = ConfBanco.getConnection();
+		
+		String sql = "CREATE TABLE IF NOT EXISTS atrativos_turisticos ( \n" + " id INTEGER AUTO PRIMARY KEY AUTOINCREMENT \n"+
+		"cidade TEXT NOT NULL \n" +
+				"cod_validacao TEXT NOT NULL \n" +
+				"como_chegar TEXT NOT NULL \n"+
+				"contato_responsavel_atrativo TEXT NOT NULL \n"+
+				" contato_responsavel_preenchimento TEXT NOT NULL \n"+
+				"date TEXT NOT NULL \n "+
+				"descricao TEXT NOT NULL \n"+
+				"email_atrativo TEXT NOT NULL \n "+
+				"email_responsavel_preenchimento TEXT  \n "+
+				"estado TEXT NOT NULL \n " +
+				"fonte_informacoes TEXT NOT NULL \n"+
+				"imgurl TEXT \n "+
+				"info_contato TEXT \n"+
+				"informacoes_relevantes TEXT \n"+
+				"latitude REAL \n"+
+				"longitude REAL \n "+
+				"nome_atrativo TEXT NOT NULL \n "
+				+"nome_responsavel_preenchimento TEXT \n" +
+				"nome_responsavel_atrativo TEXT \n"+
+				"site TEXT ";
+		
+		
+		PreparedStatement statement = (PreparedStatement)con.prepareStatement(sql);
+		
+		statement.executeQuery();
+		
+	}
+	
+	
 	public boolean verificaAtrativoTuristico(AtrativoTuristico at) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
 		String sql = "SELECT nome_atrativo,como_chegar,cod_validacao FROM atrativos_turisticos";
@@ -18,7 +56,7 @@ public class AtrativoTuristico_control {
 			String nome = rx.getString("nome_atrativo");
 			String comochegar = rx.getString("como_chegar");
 			String codva = rx.getString("cod_validacao");
-			if(at.getNome_atrativo().equals(nome) && at.getComoChegar().equals(comochegar) && at.getCodValidacao().equals(codva)){
+			if(at.getNome_atrativo().equals(nome) && at.getComochegar().equals(comochegar) && at.getCodValidacao().equals(codva)){
 				return true;
 			}
 		}
@@ -39,10 +77,10 @@ public class AtrativoTuristico_control {
 						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
 				statement.setString(1, aTuristico.getDate());
-				statement.setString(2, aTuristico.getImagemUrl());
+				statement.setString(2, aTuristico.getImgUrl());
 				statement.setString(3, aTuristico.getCodValidacao());
 				statement.setString(4, aTuristico.getNome_atrativo());
-				statement.setString(5, aTuristico.getComoChegar());
+				statement.setString(5, aTuristico.getComochegar());
 				statement.setString(6, aTuristico.getDescricao());
 				statement.setString(7, aTuristico.getInfoContato());
 				statement.setDouble(8, aTuristico.getLatitude());
@@ -54,7 +92,7 @@ public class AtrativoTuristico_control {
 				statement.setString(14, aTuristico.getEmail_responsavel_preenchimento());
 				statement.setString(15, aTuristico.getNome_responsavel_preenchimento());
 				statement.setString(16, aTuristico.getContato_responsavel_preenchimento());
-				//System.err.println("XDXDD??" + aTuristico.getContato_responsavel_preenchimento());
+				
 				statement.setString(17, aTuristico.getFonte_informacoes());
 				statement.setString(18, aTuristico.getNome_responsavel_atrativo());
 				statement.setString(19, aTuristico.getContato_responsavel_atrativo());

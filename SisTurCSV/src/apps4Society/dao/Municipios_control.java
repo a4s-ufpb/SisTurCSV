@@ -9,6 +9,38 @@ import apps4Society.model.*;
 public class Municipios_control {
 	
 	
+	public void createTablesMunicipios() throws SQLException, ClassNotFoundException{
+		/*
+		 * Responsavel por criar a tabela de Municipios no postgresql
+		 * se a mesma nao existir
+		*/
+		Connection con = ConfBanco.getConnection();
+		
+		String sql = "CREATE TABLE IF NOT EXISTS municipios ( \n" + " id INTEGER AUTO PRIMARY KEY AUTOINCREMENT \n"+
+		"area_territorial TEXT NOT NULL \n" +
+				"cod_validacao TEXT NOT NULL \n" +
+				"contatos_responsavel_preenchimento TEXT NOT NULL \n"+
+				"date TEXT NOT NULL \n"+
+				" descricao TEXT NOT NULL \n"+
+				"email_responsavel_preenchimento TEXT NOT NULL \n "+
+				"estado TEXT NOT NULL \n"+
+				"fonte_informacoes TEXT NOT NULL \n "+
+				"img_url TEXT  \n "+
+				"informacoes_relevantes TEXT NOT NULL \n " +
+				"latitude REAL \n"+
+				"longitude REAL \n "+
+				"nome_cidade TEXT NOT NULL \n"+
+				"nome_responsavel_preenchimento TEXT NOT NULL \n"+
+				"populacao INTEGER \n"+
+				"site TEXT";
+		
+		
+		PreparedStatement statement = (PreparedStatement)con.prepareStatement(sql);
+		
+		statement.executeQuery();
+		
+	}
+	
 	public boolean verificaDados(Municipios city) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
 		/*
@@ -42,10 +74,12 @@ public class Municipios_control {
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
-				String sql = "INSERT INTO municipios(date,nome_cidade,descricao,area_territorial,latitude,longitude,estado,populacao,site,informacoes_relevantes,email_responsavel_preenchimento, nome_responsavel_preenchimento, contatos_responsavel_preenchimento,fonte_informacoes) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String sql = "INSERT INTO municipios(date,img_url,cod_validacao,nome_cidade,descricao,area_territorial,latitude,longitude,estado,populacao,site,informacoes_relevantes,email_responsavel_preenchimento, nome_responsavel_preenchimento, contatos_responsavel_preenchimento,fonte_informacoes) "
+						+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				
 				
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
+				
 				statement.setString(1, municipios.getDate());
 				statement.setString(2, municipios.getImgUrl());
 				statement.setString(3, municipios.getCodValidacao());
