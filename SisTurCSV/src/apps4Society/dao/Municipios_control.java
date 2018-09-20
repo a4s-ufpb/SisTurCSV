@@ -16,28 +16,20 @@ public class Municipios_control {
 		*/
 		Connection con = ConfBanco.getConnection();
 		
-		String sql = "CREATE TABLE IF NOT EXISTS municipios ( \n" + " id INTEGER AUTO PRIMARY KEY AUTOINCREMENT \n"+
-		"area_territorial TEXT NOT NULL \n" +
-				"cod_validacao TEXT NOT NULL \n" +
-				"contatos_responsavel_preenchimento TEXT NOT NULL \n"+
-				"date TEXT NOT NULL \n"+
-				" descricao TEXT NOT NULL \n"+
-				"email_responsavel_preenchimento TEXT NOT NULL \n "+
-				"estado TEXT NOT NULL \n"+
-				"fonte_informacoes TEXT NOT NULL \n "+
-				"img_url TEXT  \n "+
-				"informacoes_relevantes TEXT NOT NULL \n " +
-				"latitude REAL \n"+
-				"longitude REAL \n "+
-				"nome_cidade TEXT NOT NULL \n"+
-				"nome_responsavel_preenchimento TEXT NOT NULL \n"+
-				"populacao INTEGER \n"+
-				"site TEXT";
+		String sql = "CREATE TABLE IF NOT EXISTS municipios ( " + 
+		" id SERIAL PRIMARY KEY, area_territorial TEXT NOT NULL, cod_validacao TEXT NOT NULL, "
+		+ "contatos_responsavel_preenchimento TEXT NOT NULL, date TEXT NOT NULL, "
+		+ "descricao TEXT NOT NULL, email_responsavel_preenchimento TEXT NOT NULL, "
+		+ "estado TEXT NOT NULL, fonte_informacoes TEXT NOT NULL, img_url TEXT, "
+		+ "informacoes_relevantes TEXT NOT NULL,latitude REAL , longitude REAL , "
+		+ "nome_cidade TEXT NOT NULL , nome_responsavel_preenchimento TEXT NOT NULL , "
+		+ "populacao INTEGER, site TEXT )";
 		
 		
 		PreparedStatement statement = (PreparedStatement)con.prepareStatement(sql);
 		
-		statement.executeQuery();
+		statement.execute();
+		
 		
 	}
 	
@@ -47,7 +39,12 @@ public class Municipios_control {
 		 * Esse metodo verifica se ja existe dados existentes entre o banco de dados e o CSV
 		 * 
 		 */
-		String sql = "SELECT nome_cidade,estado,latitude,longitude FROM municipios";
+		String nome_city = "\'"+city.getNomecidade()+"\'";
+		String estado_city = "\'"+city.getEstado()+"\'";
+		String lat_city = "\'"+city.getLatitude()+"\'";
+		String lot_city = "\'"+city.getLongitude()+"\'";
+		String sql = "SELECT nome_cidade,estado,latitude,longitude FROM municipios "
+				+ "WHERE nome_cidade="+nome_city+" AND estado="+estado_city+" AND latitude="+lat_city+" AND longitude="+lot_city;
 		PreparedStatement statement =(PreparedStatement)cx.prepareStatement(sql);
 		
 		ResultSet result = statement.executeQuery();

@@ -363,40 +363,93 @@ public class LoaderCSV implements Loggers_z{
 			
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
+			
+			String date = ""; // 0
+			String imgurl = ""; // 1
+			String codValidacao = ""; // 2
+			String nomeAtrativo = ""; // 3
+			String comoChegar = ""; // 4
+			String descricao = ""; // 5
+			String infContato = ""; // 6
+			double latitude = 0; // 7
+			double longitude = 0; // 8
+			String site = ""; // 9
+			String cidade = ""; // 10
+			String estado = ""; // 11
+			String informacoes_relevantes = ""; // 12
+			String email_responsavel = ""; // 13
+			String nome_responsavel_preenchimento = ""; // 14
+			String contato_responsavel_preenchimento = ""; // 15
+			String fonte_inf = ""; // 16
+			String nome_resp_at = ""; // 17
+			String contato_resp_at = ""; // 18
+			String email_resp_at = ""; // 19
+			
 			while((leitorLinhas=leitor.readNext())!=null){
-				System.err.println(leitorLinhas[0]);
-				System.err.println(leitorLinhas[1]);
-				System.err.println(leitorLinhas[2]);
-				System.err.println(leitorLinhas[3]);
-				System.err.println(leitorLinhas[4]);
-				System.err.println(leitorLinhas[5].trim());
-				System.err.println(leitorLinhas[6]);
-				System.err.println(leitorLinhas[7]);
-				if(leitorLinhas[2].isEmpty() || leitorLinhas[4].isEmpty() || leitorLinhas[9].isEmpty()){
-					System.err.println(leitorLinhas[1]);
-					System.err.println(leitorLinhas[0]);
-					System.out.println("Preencha os dados corretamente/1");	
-				}else{
-						String date = leitorLinhas[0].trim();
-						String imgurl = leitorLinhas[1].trim();
-						String codValidacao = leitorLinhas[1].trim();
-						String nomeAtrativo = leitorLinhas[2].trim();
-						String comoChegar = leitorLinhas[3].trim();
-						String descricao = leitorLinhas[4].trim();
-						String infContato = leitorLinhas[5].trim();
-						double latitude = Double.parseDouble(leitorLinhas[6].trim());
-						double longitude = Double.parseDouble(leitorLinhas[7].trim());
-						String site = leitorLinhas[8].trim();
-						String cidade = leitorLinhas[9].trim();
-						String estado = leitorLinhas[10].trim();
-						String informacoes_relevantes = leitorLinhas[11].trim();
-						String email_responsavel = leitorLinhas[12].trim();
-						String nome_responsavel_preenchimento = leitorLinhas[13].trim();
-						String contato_responsavel_preenchimento = leitorLinhas[14].trim();
-						String fonte_inf = leitorLinhas[15].trim();
-						String nome_resp_at = leitorLinhas[16].trim();
-						String contato_resp_at = leitorLinhas[17].trim();
-						String email_resp_at = leitorLinhas[18].trim();
+				
+				if(leitorLinhas[0].isEmpty() ){
+					date="Data nao informada!";
+				}else if(leitorLinhas[1].isEmpty()) {
+					imgurl = "Imagem nao informada!";
+				}else if(leitorLinhas[2].isEmpty()) {
+					codValidacao = "Codigo de validacao nao informado!";
+				}else if(leitorLinhas[3].isEmpty()) {
+					nomeAtrativo = "Nome Atrativo nao informado!";
+				}else if(leitorLinhas[4].isEmpty()) {
+					comoChegar = "Como chegar no atrativo nao informado!";
+				}else if(leitorLinhas[5].isEmpty()) {
+					descricao = "Descricao nao informado!";
+				}else if(leitorLinhas[6].isEmpty()) {
+					infContato= "Contato do Atrativo nao informado!";
+				}else if(leitorLinhas[7].isEmpty()) {
+					latitude = 0;
+				}else if(leitorLinhas[8].isEmpty()) {
+					longitude = 0;
+				}else if(leitorLinhas[9].isEmpty()) {
+					site = "Site do Atrativo nao informado!";
+				}else if(leitorLinhas[10].isEmpty()) {
+					cidade = "Cidade do atrativo nao informado!";
+				}else if(leitorLinhas[11].isEmpty()) {
+					estado = "Estado do atrativo nao informado";
+				}else if(leitorLinhas[12].isEmpty()) {
+					informacoes_relevantes = "Informacoes Relevantes nao informado!";
+				}else if(leitorLinhas[13].isEmpty()) {
+					email_responsavel = "Email do Responsavel pelo Atrativo nao informado";
+				}else if(leitorLinhas[14].isEmpty()) {
+					nome_responsavel_preenchimento = "Nome do Responsavel pelo preenchimento nao informado";
+				}else if(leitorLinhas[15].isEmpty()) {
+					contato_responsavel_preenchimento = "Contato do Responsavel pelo preenchimento nao informado";
+				}else if(leitorLinhas[16].isEmpty()) {
+					fonte_inf = "Fonte de informacoes nao informado!";
+				}else if(leitorLinhas[17].isEmpty()) {
+					nome_resp_at = "Nome do Responsavel pelo Atrativo nao informado!";
+				}
+				else if(leitorLinhas[18].isEmpty()) {
+					contato_resp_at = "Contato do responsavel pelo Atrativo nao informado!";
+				}else if(leitorLinhas[19].isEmpty()) {
+					email_resp_at = "Email do Responsavel pelo Atrativo nao informado!";
+				}
+				else{
+						 date = leitorLinhas[0].trim();
+						 imgurl = leitorLinhas[1].trim();
+						codValidacao = leitorLinhas[1].trim();
+						 nomeAtrativo = leitorLinhas[2].trim();
+						 comoChegar = leitorLinhas[3].trim();
+						 descricao = leitorLinhas[4].trim();
+						infContato = leitorLinhas[5].trim();
+						 latitude = Double.parseDouble(leitorLinhas[6].trim());
+						 longitude = Double.parseDouble(leitorLinhas[7].trim());
+						 site = leitorLinhas[8].trim();
+						cidade = leitorLinhas[9].trim();
+						 estado = leitorLinhas[10].trim();
+						 informacoes_relevantes = leitorLinhas[11].trim();
+						 email_responsavel = leitorLinhas[12].trim();
+						 nome_responsavel_preenchimento = leitorLinhas[13].trim();
+						 contato_responsavel_preenchimento = leitorLinhas[14].trim();
+						fonte_inf = leitorLinhas[15].trim();
+						 nome_resp_at = leitorLinhas[16].trim();
+						contato_resp_at = leitorLinhas[17].trim();
+						 email_resp_at = leitorLinhas[18].trim();
 					
 					list_atrativos.add(new AtrativoTuristico(date,imgurl,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
 							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
@@ -410,31 +463,91 @@ public class LoaderCSV implements Loggers_z{
 			
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
+			String date = ""; // 0
+			String imgurl = ""; // 1
+			String codValidacao = ""; // 2
+			String nomeAtrativo = ""; // 3
+			String comoChegar = ""; // 4
+			String descricao = ""; // 5
+			String infContato = ""; // 6
+			double latitude = 0; // 7
+			double longitude = 0; // 8
+			String site = ""; // 9
+			String cidade = ""; // 10
+			String estado = ""; // 11
+			String informacoes_relevantes = ""; // 12
+			String email_responsavel = ""; // 13
+			String nome_responsavel_preenchimento = ""; // 14
+			String contato_responsavel_preenchimento = ""; // 15
+			String fonte_inf = ""; // 16
+			String nome_resp_at = ""; // 17
+			String contato_resp_at = ""; // 18
+			String email_resp_at = ""; // 19
+			
 			while((leitorLinhas=leitor.readNext())!=null){
-				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[3].isEmpty() || leitorLinhas[6].isEmpty()){
-					System.out.println("Preencha os dados corretamente/1");	
+				if(leitorLinhas[0].isEmpty() ){
+					date="Data nao informada!";
+				}else if(leitorLinhas[1].isEmpty()) {
+					imgurl = "Imagem nao informada!";
+				}else if(leitorLinhas[2].isEmpty()) {
+					codValidacao = "Codigo de validacao nao informado!";
+				}else if(leitorLinhas[3].isEmpty()) {
+					nomeAtrativo = "Nome Atrativo nao informado!";
+				}else if(leitorLinhas[4].isEmpty()) {
+					comoChegar = "Como chegar no atrativo nao informado!";
+				}else if(leitorLinhas[5].isEmpty()) {
+					descricao = "Descricao nao informado!";
+				}else if(leitorLinhas[6].isEmpty()) {
+					infContato= "Contato do Atrativo nao informado!";
+				}else if(leitorLinhas[7].isEmpty()) {
+					latitude = 0;
+				}else if(leitorLinhas[8].isEmpty()) {
+					longitude = 0;
+				}else if(leitorLinhas[9].isEmpty()) {
+					site = "Site do Atrativo nao informado!";
+				}else if(leitorLinhas[10].isEmpty()) {
+					cidade = "Cidade do atrativo nao informado!";
+				}else if(leitorLinhas[11].isEmpty()) {
+					estado = "Estado do atrativo nao informado";
+				}else if(leitorLinhas[12].isEmpty()) {
+					informacoes_relevantes = "Informacoes Relevantes nao informado!";
+				}else if(leitorLinhas[13].isEmpty()) {
+					email_responsavel = "Email do Responsavel pelo Atrativo nao informado";
+				}else if(leitorLinhas[14].isEmpty()) {
+					nome_responsavel_preenchimento = "Nome do Responsavel pelo preenchimento nao informado";
+				}else if(leitorLinhas[15].isEmpty()) {
+					contato_responsavel_preenchimento = "Contato do Responsavel pelo preenchimento nao informado";
+				}else if(leitorLinhas[16].isEmpty()) {
+					fonte_inf = "Fonte de informacoes nao informado!";
+				}else if(leitorLinhas[17].isEmpty()) {
+					nome_resp_at = "Nome do Responsavel pelo Atrativo nao informado!";
+				}
+				else if(leitorLinhas[18].isEmpty()) {
+					contato_resp_at = "Contato do responsavel pelo Atrativo nao informado!";
+				}else if(leitorLinhas[19].isEmpty()) {
+					email_resp_at = "Email do Responsavel pelo Atrativo nao informado!";
 				}else{
-						String date = retireAspas(leitorLinhas[0].trim());
-						String imgurl = retireAspas(leitorLinhas[1].trim());
-						String codValidacao =  retireAspas(leitorLinhas[1].trim());
-						String nomeAtrativo =  retireAspas(leitorLinhas[2].trim());
-						String comoChegar =  retireAspas(leitorLinhas[3].trim());
-						String descricao =  checkCamp(retireAspas(leitorLinhas[4].trim()));
-						String infContato =  retireAspas(leitorLinhas[5].trim());
-						double latitude = Double.parseDouble( retireAspas(leitorLinhas[6].trim()));
-						double longitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
-						String site =  retireAspas(leitorLinhas[8].trim());
-						String cidade =  retireAspas(leitorLinhas[9].trim());
-						String estado =  retireAspas(leitorLinhas[10].trim());
-						String informacoes_relevantes =  retireAspas(leitorLinhas[11].trim());
-						String email_responsavel =  retireAspas(leitorLinhas[12].trim());
-						String nome_responsavel_preenchimento =  retireAspas(leitorLinhas[13].trim());
-						String contato_responsavel_preenchimento =  retireAspas(leitorLinhas[14].trim());
+						date = retireAspas(leitorLinhas[0].trim());
+						 imgurl = retireAspas(leitorLinhas[1].trim());
+						 codValidacao =  retireAspas(leitorLinhas[1].trim());
+						 nomeAtrativo =  retireAspas(leitorLinhas[2].trim());
+						comoChegar =  retireAspas(leitorLinhas[3].trim());
+						descricao =  checkCamp(retireAspas(leitorLinhas[4].trim()));
+						 infContato =  retireAspas(leitorLinhas[5].trim());
+						 latitude = Double.parseDouble( retireAspas(leitorLinhas[6].trim()));
+						 longitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
+						 site =  retireAspas(leitorLinhas[8].trim());
+						 cidade =  retireAspas(leitorLinhas[9].trim());
+						 estado =  retireAspas(leitorLinhas[10].trim());
+						 informacoes_relevantes =  retireAspas(leitorLinhas[11].trim());
+						 email_responsavel =  retireAspas(leitorLinhas[12].trim());
+						 nome_responsavel_preenchimento =  retireAspas(leitorLinhas[13].trim());
+						 contato_responsavel_preenchimento =  retireAspas(leitorLinhas[14].trim());
 						//System.err.println("XDXDXD?" + contato_responsavel_preenchimento);
-						String fonte_inf =  retireAspas(leitorLinhas[15].trim());
-						String nome_resp_at =  retireAspas(leitorLinhas[16].trim());
-						String contato_resp_at =  retireAspas(leitorLinhas[17].trim());
-						String email_resp_at =  retireAspas(leitorLinhas[18].trim());
+						 fonte_inf =  retireAspas(leitorLinhas[15].trim());
+						 nome_resp_at =  retireAspas(leitorLinhas[16].trim());
+						 contato_resp_at =  retireAspas(leitorLinhas[17].trim());
+						 email_resp_at =  retireAspas(leitorLinhas[18].trim());
 					
 					list_atrativos.add(new AtrativoTuristico(date,imgurl,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
 							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
@@ -690,6 +803,12 @@ public class LoaderCSV implements Loggers_z{
 
 	@Override
 	public void error(String msg_error) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void connect(String cnc) {
 		// TODO Auto-generated method stub
 		
 	}

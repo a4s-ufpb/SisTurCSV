@@ -181,11 +181,11 @@ public class Execute implements Loggers_z{
 			for(int i = 0 ; i <lista_Atrativo.size();i++){
 				a.addAtratativoTuristico(lista_Atrativo.get(i));
 			}
-			JOptionPane.showMessageDialog(null, "Dados do tipo AtrativoTuristico foram inseridos");
+			su("Atrativos Turisticos");
 			lista_Atrativo.clear();
 			
 		}else {
-			JOptionPane.showMessageDialog(null, "Erro no carregamento do CSV MUNICIPIOS");
+			er("Atrativo Turistico CSV");
 		}
 		
 		
@@ -194,6 +194,7 @@ public class Execute implements Loggers_z{
 	public static void carregarMunicipios(String patch, String path_log) throws IOException, ClassNotFoundException, SQLException{
 		LoaderCSV loader_muncipios = new LoaderCSV();
 		Municipios_control n = new Municipios_control();
+		n.createTablesMunicipios();
 		
 		lista_municipios = loader_muncipios.lerArquivosCSV_Municipio(patch, path_log);
 		
@@ -215,6 +216,11 @@ public class Execute implements Loggers_z{
 	}
 	@Override
 	public void error(String msg_error) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void connect(String cnc) {
 		// TODO Auto-generated method stub
 		
 	}

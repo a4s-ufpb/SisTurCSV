@@ -14,6 +14,7 @@ public interface Loggers_z {
 	void inputs(String variaveis);
 	void sucess(String msg_sucess);
 	void error(String msg_error);
+	void connect(String cnc);
 	
 	
 	

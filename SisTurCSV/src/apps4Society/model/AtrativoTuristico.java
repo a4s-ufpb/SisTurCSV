@@ -29,25 +29,25 @@ public class AtrativoTuristico extends Atrativos{
 		//* novo construtor para o formulario reformulado;
 		
 		setDate(date); // 0
-		setImgUrl(imgUrl);
-		setCodValidacao(codvalidacao); // 1
-		setNome_atrativo(nome_atrativo); // 2
-		setComochegar(comochegar); // 3
-		setDescricao(descricao); // 4
-		setInfoContato(infContato); // 5
-		setLatitude(latitude);// 6
-		setLongitude(longitude);  // 7
-		setSite(site); // 8
-		setCidade(cidade); // 9
-		setEstado(estado); // 10
-		setInformacoes_relevantes(informacoes_relevantes); // 11
-		setEmail_responsavel_preenchimento(email_responsavel); // 12
-		setNome_responsavel_preenchimento(nome_responsavel); // 13
-		setContato_responsavel_preenchimento(contato_responsavel); // 14
-		setFonte_informacoes(fonte_inf); // 15
-		setNome_responsavel_atrativo(nome_resp_at); // 16
-		setContato_responsavel_atrativo(contato_resp_at); // 17
-		setEmail_responsavel_atrativo(email_resp_at); // 18
+		setImgUrl(imgUrl); // 1
+		setCodValidacao(codvalidacao); // 2
+		setNome_atrativo(nome_atrativo); // 3
+		setComochegar(comochegar); // 4
+		setDescricao(descricao); // 5
+		setInfoContato(infContato); // 6
+		setLatitude(latitude);// 7
+		setLongitude(longitude);  // 8
+		setSite(site); // 9
+		setCidade(cidade); // 10
+		setEstado(estado); // 11
+		setInformacoes_relevantes(informacoes_relevantes); // 12
+		setEmail_responsavel_preenchimento(email_responsavel); // 13
+		setNome_responsavel_preenchimento(nome_responsavel); // 14
+		setContato_responsavel_preenchimento(contato_responsavel); // 15
+		setFonte_informacoes(fonte_inf); // 16
+		setNome_responsavel_atrativo(nome_resp_at); // 17
+		setContato_responsavel_atrativo(contato_resp_at); // 18
+		setEmail_responsavel_atrativo(email_resp_at); // 19
 		
 		
 		
