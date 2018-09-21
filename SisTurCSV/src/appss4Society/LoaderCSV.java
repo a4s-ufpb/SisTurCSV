@@ -663,7 +663,7 @@ public class LoaderCSV implements Loggers_z{
 			arq.write("\r\n");
 			arq.write("Armazenados com sucesso!");
 			arq.close();
-			paths("Arquivo atrativos.txt criado com sucesso!");
+			arqs("atrativos.txt!");
 		} catch (IOException e) {
 			e.printStackTrace();
 			}
