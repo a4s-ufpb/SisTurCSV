@@ -18,6 +18,7 @@ import Interf.Loggers_z;
 import apps4Society.dao.AtrativoTuristico_control;
 import apps4Society.dao.Municipios_control;
 import apps4Society.dao.Praia_control;
+import apps4Society.exceptions.CreateTableException;
 import apps4Society.model.AtrativoTuristico;
 import apps4Society.model.Municipios;
 import apps4Society.model.Praia;
@@ -47,7 +48,7 @@ public class Execute implements Loggers_z{
 	
 	
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws CreateTableException {
 		
 		System.out.println(" -------------------------- SisTurCSV  ------------------------- ");
 		System.out.println("Arquivos CSV suportados: municipios.csv e atrativoTuristico.csv");
@@ -92,37 +93,38 @@ public class Execute implements Loggers_z{
 	public static void er(String msg_error) {
 		slf4jLogger.info("Error, Tipo: "  + msg_error);
 	}
-	public static void pegaCaminho() {
+	public static void pegaCaminho() throws CreateTableException {
 		
-		Scanner obj_entrada = new Scanner(System.in);
-		System.out.println("Caminho do arquivo CSV [LINHA ABAIXO] : " );
-		caminho = obj_entrada.nextLine();
-		
-		if(caminho.equals("")) {
-			System.err.println("entrada invalida! ");
-		}else {
-			File arquivo = new File(caminho);
+			Scanner obj_entrada = new Scanner(System.in);
+			System.out.println("Caminho do arquivo CSV [LINHA ABAIXO] : " );
+			caminho = obj_entrada.nextLine();
 			
-			 caminho = arquivo.getAbsolutePath().toString();
-			 //System.err.println(arquivo.getAbsolutePath().toString());
-			 path_log = arquivo.getParent();
-			// System.err.println(arquivo.getParent());
-			        
-			  String nomearq = arquivo.getName();
-			 //  System.out.println(arquivo.getName());
-			       
-			       try {
-					verificaTipo(nomearq);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			if(caminho.equals("")) {
+				er("Entrada Invalida!");
+			}else {
+				File arquivo = new File(caminho);
+				
+				 caminho = arquivo.getAbsolutePath().toString();
+				 //System.err.println(arquivo.getAbsolutePath().toString());
+				 path_log = arquivo.getParent();
+				// System.err.println(arquivo.getParent());
+				        
+				  String nomearq = arquivo.getName();
+				 //  System.out.println(arquivo.getName());
+				       
+				       try {
+						verificaTipo(nomearq);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			
 		}
 	
 		}
@@ -136,7 +138,7 @@ public class Execute implements Loggers_z{
 
 
 	
-	public static void verificaTipo(String p) throws SQLException, ClassNotFoundException, IOException{
+	public static void verificaTipo(String p) throws SQLException, ClassNotFoundException, IOException, CreateTableException{
 		
 		/*
 		 * verifica o caminho do arquivo especificado, checa palavra por palavra do caminho até ser compativel com o nome
@@ -166,16 +168,16 @@ public class Execute implements Loggers_z{
 			}
 		
 		if(inter){
+			er("Path - Insira o caminho de acordo com o exemplo");
 			
-			JOptionPane.showMessageDialog(null, "Porfavor coloque um arquivo com os requisitos necessários");
 		}
 	}
 	
-	public static void carregarAtrativosTuristicos(String patch, String path_log) throws SQLException, ClassNotFoundException, IOException{
+	public static void carregarAtrativosTuristicos(String patch, String path_log) throws SQLException, ClassNotFoundException, IOException, CreateTableException{
 		LoaderCSV loader_atrativo = new LoaderCSV();
 
 		AtrativoTuristico_control a = new AtrativoTuristico_control();
-		
+		a.createTableAtrativo();
 		lista_Atrativo = loader_atrativo.lerArquivosCSV_AtrativoTuristico(patch , path_log);
 		if(lista_Atrativo!=null){
 			for(int i = 0 ; i <lista_Atrativo.size();i++){
@@ -191,7 +193,7 @@ public class Execute implements Loggers_z{
 		
 	}
 	
-	public static void carregarMunicipios(String patch, String path_log) throws IOException, ClassNotFoundException, SQLException{
+	public static void carregarMunicipios(String patch, String path_log) throws IOException, ClassNotFoundException, SQLException, CreateTableException{
 		LoaderCSV loader_muncipios = new LoaderCSV();
 		Municipios_control n = new Municipios_control();
 		n.createTablesMunicipios();

@@ -5,11 +5,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import apps4Society.conf.ConfBanco;
+import apps4Society.exceptions.CreateTableException;
 import apps4Society.model.*;
 public class Municipios_control {
 	
 	
-	public void createTablesMunicipios() throws SQLException, ClassNotFoundException{
+	public void createTablesMunicipios() throws SQLException, ClassNotFoundException, CreateTableException{
 		/*
 		 * Responsavel por criar a tabela de Municipios no postgresql
 		 * se a mesma nao existir

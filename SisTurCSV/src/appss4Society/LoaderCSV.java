@@ -529,25 +529,25 @@ public class LoaderCSV implements Loggers_z{
 				}else{
 						date = retireAspas(leitorLinhas[0].trim());
 						 imgurl = retireAspas(leitorLinhas[1].trim());
-						 codValidacao =  retireAspas(leitorLinhas[1].trim());
-						 nomeAtrativo =  retireAspas(leitorLinhas[2].trim());
-						comoChegar =  retireAspas(leitorLinhas[3].trim());
-						descricao =  checkCamp(retireAspas(leitorLinhas[4].trim()));
-						 infContato =  retireAspas(leitorLinhas[5].trim());
-						 latitude = Double.parseDouble( retireAspas(leitorLinhas[6].trim()));
-						 longitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
-						 site =  retireAspas(leitorLinhas[8].trim());
-						 cidade =  retireAspas(leitorLinhas[9].trim());
-						 estado =  retireAspas(leitorLinhas[10].trim());
-						 informacoes_relevantes =  retireAspas(leitorLinhas[11].trim());
-						 email_responsavel =  retireAspas(leitorLinhas[12].trim());
-						 nome_responsavel_preenchimento =  retireAspas(leitorLinhas[13].trim());
-						 contato_responsavel_preenchimento =  retireAspas(leitorLinhas[14].trim());
+						 codValidacao =  retireAspas(leitorLinhas[2].trim());
+						 nomeAtrativo =  retireAspas(leitorLinhas[3].trim());
+						comoChegar =  retireAspas(leitorLinhas[4].trim());
+						descricao =  checkCamp(retireAspas(leitorLinhas[5].trim()));
+						 infContato =  retireAspas(leitorLinhas[6].trim());
+						 latitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
+						 longitude = Double.parseDouble( retireAspas(leitorLinhas[8].trim()));
+						 site =  retireAspas(leitorLinhas[9].trim());
+						 cidade =  retireAspas(leitorLinhas[10].trim());
+						 estado =  retireAspas(leitorLinhas[11].trim());
+						 informacoes_relevantes =  retireAspas(leitorLinhas[12].trim());
+						 email_responsavel =  retireAspas(leitorLinhas[13].trim());
+						 nome_responsavel_preenchimento =  retireAspas(leitorLinhas[14].trim());
+						 contato_responsavel_preenchimento =  retireAspas(leitorLinhas[15].trim());
 						//System.err.println("XDXDXD?" + contato_responsavel_preenchimento);
-						 fonte_inf =  retireAspas(leitorLinhas[15].trim());
-						 nome_resp_at =  retireAspas(leitorLinhas[16].trim());
-						 contato_resp_at =  retireAspas(leitorLinhas[17].trim());
-						 email_resp_at =  retireAspas(leitorLinhas[18].trim());
+						 fonte_inf =  retireAspas(leitorLinhas[16].trim());
+						 nome_resp_at =  retireAspas(leitorLinhas[17].trim());
+						 contato_resp_at =  retireAspas(leitorLinhas[18].trim());
+						 email_resp_at =  retireAspas(leitorLinhas[19].trim());
 					
 					list_atrativos.add(new AtrativoTuristico(date,imgurl,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
 							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
@@ -757,7 +757,7 @@ public class LoaderCSV implements Loggers_z{
 		
 	}
 	
-	public String retireAspas(String string){
+	public String retireAspas(String string) throws NullPointerException {
 		 /*
 		  * Nao encontrei um metodo na classe String que retira-se os espaÃ§os que o CSV do GOOGLE FORMS CRIA,
 		  * entao criei esse metodo para retirar as aspas entre os atributos do municipios cadastrados no CSV
@@ -766,31 +766,42 @@ public class LoaderCSV implements Loggers_z{
 		  * 
 		  */
 		//System.err.println("saida" + string);
-		 
-		String saida2 = null;
-		String saida_normal = null;
-		String x = null;
+		String x="campo nao informado";
+		String y="";
 	
-		String[] saida = string.split("");
-		//System.out.print(saida[1]);
-		
-		for(int i = 1 ; i<saida.length -1 ; i ++){
-			saida2+=saida[i];
-		}
-		String[] saida_original = saida2.split("");
-		for(int i = 4; i< saida_original.length;i++){
-				saida_normal += saida_original[i];
-			
-		}
-		if(saida_normal.contains("null")){
-			String[] vl = saida_normal.split("null");
-			for( String s : vl){
+		if(string.length()==2) {
+			return x;
+		}else {
+				String saida2 = null;
+				String saida_normal = null;
 				
+				
+				
+				String[] saida = string.split("");
+				//System.out.print(saida[1]);
+				
+				for(int i = 1 ; i<saida.length -1 ; i ++){
+					saida2+=saida[i];
+				}
+				
+				String[] saida_original = saida2.split("");
+				for(int i = 4; i< saida_original.length;i++){
+						saida_normal += saida_original[i];
+					
+				}
+				if(saida_normal.contains("null")){
+					String[] vl = saida_normal.split("null");
+					for( String s : vl){
+						
 
-					 x = s;
-			}
-			
+							 x = s;
+					}
 		}
+		 
+		}
+		
+			
+		
 		return x;
 	
 	}

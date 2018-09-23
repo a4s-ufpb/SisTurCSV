@@ -1,6 +1,7 @@
 package apps4Society.dao;
 
 import apps4Society.conf.ConfBanco;
+import apps4Society.exceptions.CreateTableException;
 import apps4Society.model.AtrativoTuristico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,7 @@ public class AtrativoTuristico_control {
 	
 	
 	
-	public void createTableAtrativo() throws ClassNotFoundException, SQLException {
+	public void createTableAtrativo() throws ClassNotFoundException, SQLException, CreateTableException{
 		/*
 		 * Responsavel por criar a tabela de atrativos no postgresql
 		 * se a mesma nao existir
@@ -21,10 +22,10 @@ public class AtrativoTuristico_control {
 				" id SERIAL PRIMARY KEY, cidade TEXT NOT NULL, cod_validacao TEXT NOT NULL, "
 				+ "contato_responsavel_atrativo TEXT NOT NULL, date TEXT NOT NULL, "
 				+ "descricao TEXT NOT NULL, email_atrativo TEXT NOT NULL, "
-				+ "email_responsavel_preenchimento TEXT NOT NULL, estado TEXT NOT NULL, img_url TEXT, "
+				+ "email_responsavel_preenchimento TEXT NOT NULL, estado TEXT NOT NULL, imgUrl TEXT, "
 				+ "info_contato TEXT ,latitude REAL , longitude REAL , "
 				+ "informacoes_relevantes TEXT NOT NULL , nome_atrativo TEXT NOT NULL , "
-				+ "nome_responsavel_preenchimento TEXT, site TEXT, nome_responsavel_atrativo TEXT, contato_responsavel_preenchimento TEXT, fonte_informacoes TEXT NOT NULL )";
+				+ "nome_responsavel_preenchimento TEXT, site TEXT, nome_responsavel_atrativo TEXT, contato_responsavel_preenchimento TEXT, fonte_informacoes TEXT NOT NULL, como_chegar TEXT NOT NULL )";
 		
 		
 		PreparedStatement statement = (PreparedStatement)con.prepareStatement(sql);
@@ -40,15 +41,17 @@ public class AtrativoTuristico_control {
 		String como_at = "\'"+at.getComochegar()+"\'";
 		String estado_at = "\'"+at.getEstado()+"\'";
 		
-		String sql = "SELECT nome_atrativo,como_chegar,estado FROM atrativos_turisticos"
+		String sql = "SELECT nome_atrativo,como_chegar,cod_validacao FROM atrativos_turisticos"
 				+ " WHERE nome_atrativo="+nome_at+" AND como_chegar="+como_at+" AND estado="+estado_at;
 		PreparedStatement st = (PreparedStatement)cx.prepareStatement(sql);
 		ResultSet rx = st.executeQuery();
 		while(rx.next()){
 			String nome = rx.getString("nome_atrativo");
 			String comochegar = rx.getString("como_chegar");
-			String codva = rx.getString("estado");
+			String codva = rx.getString("cod_validacao");
+			
 			if(at.getNome_atrativo().equals(nome) && at.getComochegar().equals(comochegar) && at.getCodValidacao().equals(codva)){
+				
 				return true;
 			}
 		}
@@ -61,11 +64,11 @@ public class AtrativoTuristico_control {
 	public void addAtratativoTuristico(AtrativoTuristico aTuristico) throws SQLException, ClassNotFoundException{
 		
 		if(verificaAtrativoTuristico(aTuristico)){
-			System.out.println("Atrativo turistico ja foi adicionado no banco");
+			System.out.println("Atrativo turistico Ja adicionado: " + aTuristico.getNome_atrativo());
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
-				String sql = "INSERT INTO atrativos_turisticos(date,cod_validacao,imgUrl,nome_atrativo,como_chegar,descricao,info_contato,latitude,longitude,site,cidade,estado,informacoes_relevantes,email_responsavel_preenchimento,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_informacoes,nome_responsavel_atrativo,contato_responsavel_atrativo,email_atrativo)" +
+				String sql = "INSERT INTO atrativos_turisticos(date,imgUrl,cod_validacao,nome_atrativo,como_chegar,descricao,info_contato,latitude,longitude,site,cidade,estado,informacoes_relevantes,email_responsavel_preenchimento,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_informacoes,nome_responsavel_atrativo,contato_responsavel_atrativo,email_atrativo)" +
 						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
 				statement.setString(1, aTuristico.getDate());
