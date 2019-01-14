@@ -16,7 +16,7 @@ private long id;
 	private String codValidacao;
 	private String nome_cidade; // 1
 	private String areaTerritorial; // 3
-	private int populacao; // 7 
+	private String populacao; // 7 
 	
 	
 
@@ -29,10 +29,10 @@ private long id;
 	public void setNomecidade(String nome) {
 		this.nome_cidade = nome;
 	}
-	public int getPopulacao() {
+	public String getPopulacao() {
 		return populacao;
 	}
-	public void setPopulacao(int populacao) {
+	public void setPopulacao(String populacao) {
 		this.populacao = populacao;
 	}
 	
@@ -64,7 +64,7 @@ private long id;
 		this.areaTerritorial = areaTerritorial;
 	}
 	
-	public Municipios(String data, String imgUrl,String codValidacao,String nomecidade, String desc , String area, String lat, String longi , String estado1,int populacao,String site, String inf_relevante , String emailResponsavel ,String nomeResponsavel, String contatoResponsavel ,String informacoesFonte){
+	public Municipios(String data, String imgUrl,String codValidacao,String nomecidade, String desc , String area, String lat, String longi , String estado1,String populacao,String site, String inf_relevante , String emailResponsavel ,String nomeResponsavel, String contatoResponsavel ,String informacoesFonte){
 		setDate(data); // 0
 		setImgUrl(imgUrl); // 1
 		setCodValidacao(codValidacao); // 2

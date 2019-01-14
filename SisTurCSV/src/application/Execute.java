@@ -42,7 +42,7 @@ public class Execute implements Loggers_z{
 	public static void main(String args[]) throws CreateTableException {
 		String file = new File("").getAbsolutePath();
 		readMe(file);
-		pegaCaminho(args[0]);
+		pegaCaminho("C://Users//osvaldoairon//Desktop//municipios.csv");
 	}
 	
 	@Override
@@ -70,7 +70,6 @@ public class Execute implements Loggers_z{
 			if(file!=null){
 				System.out.println("Arquivo Readme criado");
 			}
-
 			FileWriter arq = new FileWriter(file);
 			arq.write("---------------------------------Apps4Society--------------------------------------");
 			arq.write("\r\n");
@@ -107,13 +106,11 @@ public class Execute implements Loggers_z{
 				File arquivo = new File(caminho);
 				
 				 caminho = arquivo.getAbsolutePath().toString();
-				 //System.err.println(arquivo.getAbsolutePath().toString());
+				
 				 path_log = arquivo.getParent();
-				// System.err.println(arquivo.getParent());
-				        
+  
 				  String nomearq = arquivo.getName();
-				 //  System.out.println(arquivo.getName());
-				       
+
 				       try {
 						verificaTipo(nomearq);
 					} catch (SQLException e1) {
@@ -131,33 +128,13 @@ public class Execute implements Loggers_z{
 	
 		}
 		
-		
-		
-		
-	
-	
-
-
-
-	
 	public static void verificaTipo(String p) throws SQLException, ClassNotFoundException, IOException, CreateTableException{
-		
-		/*
-		 * verifica o caminho do arquivo especificado, checa palavra por palavra do caminho até ser compativel com o nome
-		 * do CSV especifico
-		 * ex: /home/osvaldoairon/Documentos/praias.csv
-		 *  ValidaPraia é igual a home?, osvaldoairon? ,Documentos?, praias.csv?
-		 *  se sim ele carrega os metodos do CSV. 
-		 */
-		
-		
 		String validaPraia = "praias.csv";
 		String validaMunicipio ="municipios.csv";
 		String validaAtrativo = "atrativoTuristico.csv";
 		boolean inter=false;
 		
 			if(p.equals(validaPraia)){
-				//carregarPraias(caminho);
 				inter = false;
 			}else if(p.equals(validaMunicipio)){
 				carregarMunicipios(caminho , path_log);

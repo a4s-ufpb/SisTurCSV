@@ -108,7 +108,7 @@ public class AtrativoTuristico_control {
 	public void deleteAtrativoTuristico(int ID_atratativo) throws SQLException{
 		try{
 			Connection cx= ConfBanco.getConnection();
-			String sql = "DELETE FROM atratativos_turisticos WHERE id = ?";
+			String sql = "DELETE * FROM atratativos_turisticos WHERE id = ?";
 			PreparedStatement statement =(PreparedStatement)cx.prepareStatement(sql);
 			statement.setInt(1,ID_atratativo);
 			

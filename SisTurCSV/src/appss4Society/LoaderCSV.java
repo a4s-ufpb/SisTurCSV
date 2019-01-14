@@ -87,7 +87,7 @@ public class LoaderCSV implements Loggers_z{
 				 imgUrl=retireAspas(leitorLinhas[1].trim());
 				 codvalidacao = retireAspas(leitorLinhas[2].trim());
 				 nomeCidade = retireAspas(leitorLinhas[3].trim());
-				 descricao = checkCamp(retireAspas(leitorLinhas[4].trim()));
+				 descricao = retireAspas(leitorLinhas[4].trim());
 				 area = String.valueOf(retireAspas(leitorLinhas[5].trim()));
 				 latitude = String.valueOf(retireAspas(leitorLinhas[6].trim()));
 				 longitude = String.valueOf(retireAspas(leitorLinhas[7].trim()));
@@ -101,8 +101,8 @@ public class LoaderCSV implements Loggers_z{
 				 fonte_inf = retireAspas(leitorLinhas[15].trim());
 		
 	
-				System.err.println(latitude);
-				list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,latitude,longitude,estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
+				
+				list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,latitude,longitude,estado,populacao,site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
 				
 				
 			
@@ -327,7 +327,6 @@ public class LoaderCSV implements Loggers_z{
 		  * 
 		  * 
 		  */
-		//System.err.println("saida" + string);
 		String x="campo nao informado";
 		String y="";
 	
@@ -336,11 +335,7 @@ public class LoaderCSV implements Loggers_z{
 		}else {
 				String saida2 = null;
 				String saida_normal = null;
-				
-				
-				
 				String[] saida = string.split("");
-				//System.out.print(saida[1]);
 				
 				for(int i = 1 ; i<saida.length -1 ; i ++){
 					saida2+=saida[i];
@@ -360,10 +355,7 @@ public class LoaderCSV implements Loggers_z{
 					}
 		}
 		 
-		}
-		
-			
-		
+		}		
 		return x;
 	
 	}

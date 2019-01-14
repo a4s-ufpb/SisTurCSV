@@ -72,28 +72,28 @@ public class Municipios_control {
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
-				String sql = "INSERT INTO municipios(date,img_url,cod_validacao,nome_cidade,descricao,area_territorial,latitude,longitude,estado,populacao,site,informacoes_relevantes,email_responsavel_preenchimento, nome_responsavel_preenchimento, contatos_responsavel_preenchimento,fonte_informacoes) "
-						+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String sql = "INSERT INTO municipios(actived,date,img_url,cod_validacao,nome_cidade,descricao,area_territorial,latitude,longitude,estado,populacao,site,informacoes_relevantes,email_responsavel_preenchimento, nome_responsavel_preenchimento, contatos_responsavel_preenchimento,fonte_informacoes) "
+						+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				
 				
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
-				
-				statement.setString(1, municipios.getDate());
-				statement.setString(2, municipios.getImgUrl());
-				statement.setString(3, municipios.getCodValidacao());
-				statement.setString(4, municipios.getNomecidade());
-				statement.setString(5, municipios.getDescricao());
-				statement.setString(6, municipios.getAreaTerritorial());
-				statement.setString(7, municipios.getLatitude());
-				statement.setString(8, municipios.getLongitude());
-				statement.setString(9, municipios.getEstado());
-				statement.setInt(10,municipios.getPopulacao());
-				statement.setString(11, municipios.getSite());
-				statement.setString(12,municipios.getInformacoesRelevantes());
-				statement.setString(13, municipios.getEmail_responsavel());
-				statement.setString(14, municipios.getNome_responsavel());
-				statement.setString(15, municipios.getContatos_responsavel());
-				statement.setString(16, municipios.getFonte_informacoes());
+				statement.setBoolean(1, true);
+				statement.setString(2, municipios.getDate());
+				statement.setString(3, municipios.getImgUrl());
+				statement.setString(4, municipios.getCodValidacao());
+				statement.setString(5, municipios.getNomecidade());
+				statement.setString(6, municipios.getDescricao());
+				statement.setString(7, municipios.getAreaTerritorial());
+				statement.setString(8, municipios.getLatitude());
+				statement.setString(9, municipios.getLongitude());
+				statement.setString(10, municipios.getEstado());
+				statement.setString(11,municipios.getPopulacao());
+				statement.setString(12, municipios.getSite());
+				statement.setString(13,municipios.getInformacoesRelevantes());
+				statement.setString(14, municipios.getEmail_responsavel());
+				statement.setString(15, municipios.getNome_responsavel());
+				statement.setString(16, municipios.getContatos_responsavel());
+				statement.setString(17, municipios.getFonte_informacoes());
 				
 				
 				statement.execute();
@@ -113,7 +113,7 @@ public class Municipios_control {
 		
 		try{
 			Connection cx = ConfBanco.getConnection();
-			String sql = "DELETE FROM municipios WHERE id= ?";
+			String sql = "DELETE * FROM municipios WHERE id= ?";
 			PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
 			statement.setInt(1, ID_municipio);
 			statement.execute();
