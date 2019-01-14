@@ -36,10 +36,6 @@ public class Municipios_control {
 	
 	public boolean verificaDados(Municipios city) throws SQLException, ClassNotFoundException{
 		Connection cx = ConfBanco.getConnection();
-		/*
-		 * Esse metodo verifica se ja existe dados existentes entre o banco de dados e o CSV
-		 * 
-		 */
 		String nome_city = "\'"+city.getNomecidade()+"\'";
 		String estado_city = "\'"+city.getEstado()+"\'";
 		String lat_city = "\'"+city.getLatitude()+"\'";
@@ -53,9 +49,10 @@ public class Municipios_control {
 			String name = result.getString("nome_cidade");
 			String estado = result.getString("estado");
 			String lat = result.getString("latitude");
-			String longi = result.getString("longitude"); 
-			if(city.getNomecidade().equals(name) && city.getEstado().equals(estado) && city.getLatitude()==lat && city.getLongitude() == longi){
-				// daado ja esta incluso
+			String longi = result.getString("longitude");
+			
+			if(city.getNomecidade().equals(name) && city.getEstado().equals(estado) && city.getLatitude().equals(lat) && city.getLongitude().equals(longi)){
+				
 				return true;
 			}
 		}

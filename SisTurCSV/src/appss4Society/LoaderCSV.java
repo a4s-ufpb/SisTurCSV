@@ -64,6 +64,7 @@ public class LoaderCSV implements Loggers_z{
 			@SuppressWarnings("deprecation")
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas; 
+			
 			String data = ""; // 0
 			String imgUrl= ""; // 1
 			String codvalidacao = ""; // 2
@@ -96,13 +97,30 @@ public class LoaderCSV implements Loggers_z{
 				 site = retireAspas(leitorLinhas[10]);
 				 inf_relevante = retireAspas(leitorLinhas[11].trim());
 				 email_responsavel = retireAspas(leitorLinhas[12].trim());
-				 nome_responsavel = retireAspas(leitorLinhas[13].trim());
-				 contato_responsavel = retireAspas(leitorLinhas[14].trim());
-				 fonte_inf = retireAspas(leitorLinhas[15].trim());
-		
-	
-				
-				list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,latitude,longitude,estado,populacao,site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
+				 fonte_inf = retireAspas(leitorLinhas[13].trim());
+				 nome_responsavel = retireAspas(leitorLinhas[14].trim());
+				 contato_responsavel = retireAspas(leitorLinhas[15].trim());
+				 
+
+				list_mun.add(new Municipios(
+						data,
+						imgUrl,
+						codvalidacao,
+						nomeCidade,
+						descricao,
+						area,
+						latitude,
+						longitude,
+						estado,
+						populacao,
+						site,
+						inf_relevante, 
+						email_responsavel, 
+						nome_responsavel , 
+						contato_responsavel,
+						fonte_inf
+						
+						));
 				
 				
 			
