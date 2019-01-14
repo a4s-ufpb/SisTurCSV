@@ -42,7 +42,7 @@ public class Execute implements Loggers_z{
 	public static void main(String args[]) throws CreateTableException {
 		String file = new File("").getAbsolutePath();
 		readMe(file);
-		pegaCaminho(file);
+		pegaCaminho(args[0]);
 	}
 	
 	@Override
