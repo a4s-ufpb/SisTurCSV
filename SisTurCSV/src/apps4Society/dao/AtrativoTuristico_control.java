@@ -23,9 +23,15 @@ public class AtrativoTuristico_control {
 				+ "contato_responsavel_atrativo TEXT NOT NULL, date TEXT NOT NULL, "
 				+ "descricao TEXT NOT NULL, email_atrativo TEXT NOT NULL, "
 				+ "email_responsavel_preenchimento TEXT NOT NULL, estado TEXT NOT NULL, imgUrl TEXT, "
-				+ "info_contato TEXT ,latitude REAL , longitude REAL , "
+				+ "info_contato TEXT ,latitude TEXT , longitude TEXT , "
 				+ "informacoes_relevantes TEXT NOT NULL , nome_atrativo TEXT NOT NULL , "
-				+ "nome_responsavel_preenchimento TEXT, site TEXT, nome_responsavel_atrativo TEXT, contato_responsavel_preenchimento TEXT, fonte_informacoes TEXT NOT NULL, como_chegar TEXT NOT NULL )";
+				+ 
+				"nome_responsavel_preenchimento TEXT, "
+				+ "site TEXT, nome_responsavel_atrativo TEXT, "
+				+ "contato_responsavel_preenchimento TEXT, "
+				+ "fonte_informacoes TEXT NOT NULL, "
+				+ "como_chegar TEXT NOT NULL, "
+				+ "link_maps TEXT )";
 		
 		
 		PreparedStatement statement = (PreparedStatement)con.prepareStatement(sql);

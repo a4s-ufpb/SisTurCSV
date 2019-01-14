@@ -22,9 +22,9 @@ public class Municipios_control {
 		+ "contatos_responsavel_preenchimento TEXT NOT NULL, date TEXT NOT NULL, "
 		+ "descricao TEXT NOT NULL, email_responsavel_preenchimento TEXT NOT NULL, "
 		+ "estado TEXT NOT NULL, fonte_informacoes TEXT NOT NULL, img_url TEXT, "
-		+ "informacoes_relevantes TEXT NOT NULL,latitude REAL , longitude REAL , "
+		+ "informacoes_relevantes TEXT NOT NULL,latitude TEXT , longitude TEXT , "
 		+ "nome_cidade TEXT NOT NULL , nome_responsavel_preenchimento TEXT NOT NULL , "
-		+ "populacao INTEGER, site TEXT )";
+		+ "populacao TEXT, site TEXT )";
 		
 		
 		PreparedStatement statement = (PreparedStatement)con.prepareStatement(sql);
