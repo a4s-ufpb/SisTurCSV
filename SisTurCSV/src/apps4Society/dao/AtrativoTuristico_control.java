@@ -68,32 +68,31 @@ public class AtrativoTuristico_control {
 		}else{
 			try{
 				Connection cx = ConfBanco.getConnection();
-				String sql = "INSERT INTO atrativos_turisticos(date,imgUrl,cod_validacao,nome_atrativo,como_chegar,descricao,info_contato,latitude,longitude,site,cidade,estado,informacoes_relevantes,email_responsavel_preenchimento,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_informacoes,nome_responsavel_atrativo,contato_responsavel_atrativo,email_atrativo)" +
-						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String sql = "INSERT INTO atrativos_turisticos(actived,date,email_responsavel_preenchimento,nome_atrativo,como_chegar,descricao,imgurl,info_contato,latitude,longitude,link_maps,site,cidade,estado,nome_responsavel_atrativo,contato_responsavel_atrativo,email_atrativo,informacoes_relevantes,fonte_informacoes,contato_responsavel_preenchimento,nome_responsavel_preenchimento,cod_validacao)" +
+						"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement statement = (PreparedStatement)cx.prepareStatement(sql);
-				statement.setString(1, aTuristico.getDate());
-				statement.setString(2, aTuristico.getImgUrl());
-				statement.setString(3, aTuristico.getCodValidacao());
+				statement.setBoolean(1, true);
+				statement.setString(2, aTuristico.getDate());
+				statement.setString(3, aTuristico.getEmail_responsavel_preenchimento());
 				statement.setString(4, aTuristico.getNome_atrativo());
 				statement.setString(5, aTuristico.getComochegar());
 				statement.setString(6, aTuristico.getDescricao());
-				statement.setString(7, aTuristico.getInfoContato());
-				statement.setDouble(8, aTuristico.getLatitude());
-				statement.setDouble(9, aTuristico.getLongitude());
-				statement.setString(10, aTuristico.getSite());
-				statement.setString(11, aTuristico.getCidade());
-				statement.setString(12, aTuristico.getEstado());
-				statement.setString(13, aTuristico.getInformacoes_relevantes());
-				statement.setString(14, aTuristico.getEmail_responsavel_preenchimento());
-				statement.setString(15, aTuristico.getNome_responsavel_preenchimento());
-				statement.setString(16, aTuristico.getContato_responsavel_preenchimento());
-				statement.setString(17, aTuristico.getFonte_informacoes());
-				statement.setString(18, aTuristico.getNome_responsavel_atrativo());
-				statement.setString(19, aTuristico.getContato_responsavel_atrativo());
-				statement.setString(20, aTuristico.getEmail_responsavel_atrativo());
-				
-				
-				
+				statement.setString(7, aTuristico.getImgUrl());
+				statement.setString(8, aTuristico.getInfoContato());
+				statement.setString(9, aTuristico.getLatitude());
+				statement.setString(10, aTuristico.getLongitude());
+				statement.setString(11, aTuristico.getLink_maps());
+				statement.setString(12, aTuristico.getSite());
+				statement.setString(13, aTuristico.getCidade());
+				statement.setString(14, aTuristico.getEstado());
+				statement.setString(15, aTuristico.getNome_responsavel_atrativo());
+				statement.setString(16, aTuristico.getContato_responsavel_atrativo());
+				statement.setString(17, aTuristico.getEmail_responsavel_atrativo());
+				statement.setString(18, aTuristico.getInformacoes_relevantes());
+				statement.setString(19, aTuristico.getFonte_informacoes());
+				statement.setString(20, aTuristico.getContato_responsavel_preenchimento());
+				statement.setString(21, aTuristico.getNome_responsavel_preenchimento());
+				statement.setString(22, aTuristico.getCodValidacao());
 				
 				statement.execute();
 				statement.close();

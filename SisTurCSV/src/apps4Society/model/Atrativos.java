@@ -4,8 +4,8 @@ public class Atrativos {
 	
 	private String date;
 	private String imgUrl;
-	private double latitude;
-	private double longitude;
+	private String latitude;
+	private String longitude;
 	private long id;
 	private String site;
 	private String cidade;
@@ -27,16 +27,16 @@ public class Atrativos {
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 	public long getId() {

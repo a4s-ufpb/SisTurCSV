@@ -18,36 +18,58 @@ public class AtrativoTuristico extends Atrativos{
 	private String codValidacao;
 	private String infoContato;
 	private String informacoes_relevantes;
-
+	private String link_maps;
 	
 	
 	
-	public AtrativoTuristico(String date,String imgUrl , String codvalidacao , String nome_atrativo, String comochegar , String descricao 
-			, String infContato,double latitude , double longitude,String site , String cidade , String estado , 
-			String informacoes_relevantes, String email_responsavel , String nome_responsavel , String contato_responsavel , 
-			String fonte_inf , String nome_resp_at , String contato_resp_at , String email_resp_at) {
+	public AtrativoTuristico
+	(
+			
+			String date, // 0
+			String email_responsavel_preenchimento , // 1
+			String nome_atrativo ,  // 2
+			String comochegar, // 3
+			String  descricao, // 4
+			String imgUrl, // 5
+			String infContato,// 6
+			String latitude , // 7
+			String longitude,// 8
+			String link_maps,// 9
+			String site , // 10
+			String cidade , // 11
+			String estado , // 12
+			String nome_responsavel_at, // 13
+			String contato_responsavel_at , // 14
+			String email_resp_at , // 15
+			String informacoes_relevantes , // 16
+			String fonte_inf , // 17
+			String contato_preenchimento , // 18
+			String nome_preenchimento , // 19
+			String cod_validacao// 20
+			) {
 		//* novo construtor para o formulario reformulado;
 		
 		setDate(date); // 0
-		setImgUrl(imgUrl); // 1
-		setCodValidacao(codvalidacao); // 2
-		setNome_atrativo(nome_atrativo); // 3
-		setComochegar(comochegar); // 4
-		setDescricao(descricao); // 5
+		setEmail_responsavel_preenchimento(email_responsavel_preenchimento); // 1
+		setNome_atrativo(nome_atrativo); // 2
+		setComochegar(comochegar); // 3
+		setDescricao(descricao); // 4
+		setImgUrl(imgUrl); // 5
 		setInfoContato(infContato); // 6
 		setLatitude(latitude);// 7
 		setLongitude(longitude);  // 8
-		setSite(site); // 9
-		setCidade(cidade); // 10
-		setEstado(estado); // 11
-		setInformacoes_relevantes(informacoes_relevantes); // 12
-		setEmail_responsavel_preenchimento(email_responsavel); // 13
-		setNome_responsavel_preenchimento(nome_responsavel); // 14
-		setContato_responsavel_preenchimento(contato_responsavel); // 15
-		setFonte_informacoes(fonte_inf); // 16
-		setNome_responsavel_atrativo(nome_resp_at); // 17
-		setContato_responsavel_atrativo(contato_resp_at); // 18
-		setEmail_responsavel_atrativo(email_resp_at); // 19
+		setLink_maps(link_maps); // 9
+		setSite(site); // 10
+		setCidade(cidade); // 11
+		setEstado(estado); // 12
+		setNome_responsavel_atrativo(nome_responsavel_at); // 13
+		setContato_responsavel_atrativo(contato_responsavel_at); // 14
+		setEmail_responsavel_atrativo(email_resp_at); // 15
+		setInformacoes_relevantes(informacoes_relevantes); // 16
+		setFonte_informacoes(fonte_inf); // 17
+		setContato_responsavel_preenchimento(contato_preenchimento); // 18
+		setNome_responsavel_preenchimento(nome_preenchimento); // 19
+		setCodValidacao(cod_validacao); //20
 		
 		
 		
@@ -82,6 +104,12 @@ public class AtrativoTuristico extends Atrativos{
 	}
 	public void setInformacoes_relevantes(String informacoes_relevantes) {
 		this.informacoes_relevantes = informacoes_relevantes;
+	}
+	public String getLink_maps() {
+		return link_maps;
+	}
+	public void setLink_maps(String link_maps) {
+		this.link_maps = link_maps;
 	}
 	
 	

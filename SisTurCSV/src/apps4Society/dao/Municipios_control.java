@@ -52,8 +52,8 @@ public class Municipios_control {
 		while(result.next()){
 			String name = result.getString("nome_cidade");
 			String estado = result.getString("estado");
-			Double lat = result.getDouble("latitude");
-			Double longi = result.getDouble("longitude");
+			String lat = result.getString("latitude");
+			String longi = result.getString("longitude"); 
 			if(city.getNomecidade().equals(name) && city.getEstado().equals(estado) && city.getLatitude()==lat && city.getLongitude() == longi){
 				// daado ja esta incluso
 				return true;
@@ -84,8 +84,8 @@ public class Municipios_control {
 				statement.setString(4, municipios.getNomecidade());
 				statement.setString(5, municipios.getDescricao());
 				statement.setString(6, municipios.getAreaTerritorial());
-				statement.setDouble(7, municipios.getLatitude());
-				statement.setDouble(8, municipios.getLongitude());
+				statement.setString(7, municipios.getLatitude());
+				statement.setString(8, municipios.getLongitude());
 				statement.setString(9, municipios.getEstado());
 				statement.setInt(10,municipios.getPopulacao());
 				statement.setString(11, municipios.getSite());

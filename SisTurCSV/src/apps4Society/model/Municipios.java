@@ -64,7 +64,7 @@ private long id;
 		this.areaTerritorial = areaTerritorial;
 	}
 	
-	public Municipios(String data, String imgUrl,String codValidacao,String nomecidade, String desc , String area, Double lat, Double longi , String estado1,int populacao,String site, String inf_relevante , String emailResponsavel ,String nomeResponsavel, String contatoResponsavel ,String informacoesFonte){
+	public Municipios(String data, String imgUrl,String codValidacao,String nomecidade, String desc , String area, String lat, String longi , String estado1,int populacao,String site, String inf_relevante , String emailResponsavel ,String nomeResponsavel, String contatoResponsavel ,String informacoesFonte){
 		setDate(data); // 0
 		setImgUrl(imgUrl); // 1
 		setCodValidacao(codValidacao); // 2

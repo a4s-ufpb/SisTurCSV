@@ -23,11 +23,10 @@ public class ConfBanco implements Loggers_z{
 		Class.forName("org.postgresql.Driver");
 		DriverManager.registerDriver(new org.postgresql.Driver());
 		
-		String hostname="192.168.0.7";
-		String appDB = "apps4Society";
+		
 		String user = "postgres";
-		String password = "6036236";
-		String url = "jdbc:postgresql://192.168.0.107:5432/apps4Society";
+		String password = "admin";
+		String url = "jdbc:postgresql://192.168.0.108:5432/apps4Society";
 		
 	
 		Connection com = DriverManager.getConnection(url,user,password);

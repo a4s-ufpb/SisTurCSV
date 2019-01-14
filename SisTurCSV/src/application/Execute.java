@@ -1,6 +1,7 @@
 package application;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,11 +24,6 @@ import apps4Society.model.AtrativoTuristico;
 import apps4Society.model.Municipios;
 import apps4Society.model.Praia;
 import appss4Society.LoaderCSV;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import java.util.Scanner;
 
 public class Execute implements Loggers_z{
@@ -43,38 +39,17 @@ public class Execute implements Loggers_z{
 	 * Gerenciador de Logs!
 	 */
 	private final static Logger slf4jLogger = LoggerFactory.getLogger(Execute.class);
-	
-	
-	
-	
-	
 	public static void main(String args[]) throws CreateTableException {
-		
-		System.out.println(" -------------------------- SisTurCSV  ------------------------- ");
-		System.out.println("Arquivos CSV suportados: municipios.csv e atrativoTuristico.csv");
-		System.out.println("Digite o caminho completo do arquivo ");
-		System.out.println("Exemplo Windows: C:\\\\Users\\\\osvaldoairon\\\\Desktop\\\\municipios.csv");
-		System.out.println("Exemplo Linux: /home/osvaldoairon/Documentos/atrativoTuristico.csv");
-		System.out.println("");
-		System.out.println("--------------------------------------------------------------------");
-		System.out.println("Obs: Nome dos arquivos csv DEVEM SER 'municipios.csv' ou 'atrativoTuristico.csv' ");
-		
-		
-	
-		pegaCaminho();
-		
-		
-		
-		
-
+		String file = new File("").getAbsolutePath();
+		readMe(file);
+		pegaCaminho(args[0]);
 	}
+	
 	@Override
 	public void paths(String name) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 	@Override
 	public void arqs(String arqs) {
 		// TODO Auto-generated method stub
@@ -87,17 +62,44 @@ public class Execute implements Loggers_z{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public static void readMe(String path) {
+
+		try {
+			File file = new File(path +"/"+"Readme.txt"); // quebra de linha \r\n
+			if(file!=null){
+				System.out.println("Arquivo Readme criado");
+			}
+
+			FileWriter arq = new FileWriter(file);
+			arq.write("---------------------------------Apps4Society--------------------------------------");
+			arq.write("\r\n");
+			arq.write("\r\n");
+			arq.write(" -               Arquivos CSV suportados: municipios.csv e atrativoTuristico.csv  -");
+			arq.write("\r\n");
+			arq.write(" - O caminho do arquivo deve ser passado via argumento ! ");
+			arq.write("\r\n");
+			arq.write("Exemplo Windows: C:\\\\Users\\\\osvaldoairon\\\\Desktop\\\\municipios.csv");
+			arq.write("\r\n");
+			arq.write("Exemplo Linux: /home/osvaldoairon/Documentos/atrativoTuristico.csv");
+			arq.write("\r\n");
+			arq.write("Obs: Nome dos arquivos csv DEVEM SER 'municipios.csv' ou 'atrativoTuristico.csv' ");
+			arq.write("\r\n");
+			arq.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public static void su(String msg_sucess) {
 		slf4jLogger.info("Dados inseridos com sucesso Tipo: "  + msg_sucess);
 	}
 	public static void er(String msg_error) {
 		slf4jLogger.info("Error, Tipo: "  + msg_error);
 	}
-	public static void pegaCaminho() throws CreateTableException {
+	public static void pegaCaminho(String args) throws CreateTableException {
 		
-			Scanner obj_entrada = new Scanner(System.in);
-			System.out.println("Caminho do arquivo CSV [LINHA ABAIXO] : " );
-			caminho = obj_entrada.nextLine();
+			
+			caminho = args;
 			
 			if(caminho.equals("")) {
 				er("Entrada Invalida!");

@@ -37,32 +37,6 @@ public class LoaderCSV implements Loggers_z{
 		
 		
 	}
-	/*
-	 * Problemas a serem resolvidos qualquer valor diferente do indice especificado , tera seu valor no banco trocado
-	 * se forem dos mesmos tipos
-	 * ele pega sempre a primeira linha de cada coluna, impossibilitando do usuario criar algum "nome referencia"
-	 * na primeira linha do arquivo
-	 */
-	
-	public void teste() throws IllegalStateException, IOException{
-		/*
-		 * Esse codigo no FIleReader permite que as primeiras linhas do arquivos nao sejam lidas
-		 * dessa forma facilitando a compreensando do usuario para inserir os dados respectivos;
-		 * 
-		 * 
-		 * CSVReader reader = new CSVReader(new FileReader("/home/osvaldoairon/Documentos/xd.csv"),',', '\t',1);
-		 String[] linhas;
-		 while((linhas=reader.readNext())!=null){
-			 System.out.println(linhas[2]);
-			
-		 }
-	}
-		 */
-		
-		
-	
-	}
-	
 	@Override
 	public  void paths(String name) {
 		// TODO Auto-generated method stub
@@ -82,261 +56,61 @@ public class LoaderCSV implements Loggers_z{
 		
 		
 	}
-	
-	
-	public ArrayList<Praia> lerArquivosCSV_Praia(String caminhoCSV){
-		/*
-		 * Indices
-		 * nome = 0
-		 * comochegar= 1
-		 * descricao = 2
-		 * infoContato = 3
-		 * latitude = 4
-		 * longitude =5
-		 * perigotubarao =6
-		 * propriabanho = 7
-		 * tipoOrla=8
-		 */
-		try{
-			
-			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
-			String[] leitorLinhas;
-			
-			while((leitorLinhas=leitor.readNext()) != null){
-				int x = leitorLinhas.length -1;				
-				if(leitorLinhas[0].isEmpty() || leitorLinhas[1].isEmpty() || leitorLinhas[2].isEmpty() || leitorLinhas[6].isEmpty() || leitorLinhas[7].isEmpty() || leitorLinhas[8].isEmpty()){
-					System.out.print("Preencha os dados corretamente");
-				}else{
-					list_praias.add(new Praia(leitorLinhas[0],leitorLinhas[1],leitorLinhas[2],leitorLinhas[3],Double.parseDouble(leitorLinhas[4]),Double.parseDouble(leitorLinhas[5]),leitorLinhas[6],leitorLinhas[7],leitorLinhas[8]));
-					salvarLogs_praias(list_praias,caminhoCSV);
-					
-				}
-				
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		System.err.println("Tamanho da lista praia"+list_praias.size());
-		return list_praias;
-	}
 	public ArrayList<Municipios> lerArquivosCSV_Municipio(String caminhoCSV, String path_log) throws IOException{
-		/*
-		 * Cria um objeto do tipo leitorCsv que carrega um arquivo do tipo csv;
-		 * Ã© necessario passar um caminho do arquivo para que ele carregue;
-		 * foi criado um array de string que percorre a cada iteraÃ§cao do leitor
-		 * cada campo Ã© separado por virgula, desse modo ele retorna os dados da coluna 0
-		 */
-		
-		/*
-		 * Indices Para Municipios
-		 * 0 = date
-		 * 1= cep
-		 * 2 = areaTerritorial
-		 * 3 = estado
-		 * 4 = latitude
-		 * 5 = longitude
-		 * 6 = nome
-		 * 7 = populacao
-		 * 8 = site
-		 */
 		try{
 			
 			paths(caminhoCSV);
 			
+			@SuppressWarnings("deprecation")
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
-			String[] leitorLinhas;
-			
-			String data = "";
-			String imgUrl= "";
-			String codvalidacao = "";
-			String nomeCidade = "";
-			String descricao = "";
-			String area = "";
-			String latitude = "";
-			String longitude = "";
-			String estado = "";
-			String populacao = "";
-			String site = "";
-			String inf_relevante = "";
-			String email_responsavel = "";
-			String nome_responsavel = "";
-			String contato_responsavel = "";
-			String fonte_inf = "";
+			String[] leitorLinhas; 
+			String data = ""; // 0
+			String imgUrl= ""; // 1
+			String codvalidacao = ""; // 2
+			String nomeCidade = ""; // 3
+			String descricao = ""; // 4
+			String area = ""; // 5
+			String latitude = ""; // 6
+			String longitude = ""; // 7
+			String estado = ""; // 8
+			String populacao = ""; // 9
+			String site = ""; // 10
+			String inf_relevante = ""; // 11
+			String email_responsavel = ""; // 12
+			String nome_responsavel = ""; // 13
+			String contato_responsavel = ""; // 14
+			String fonte_inf = ""; // 15
 			
 			while((leitorLinhas=leitor.readNext()) != null){
-				int x = leitorLinhas.length -1;
-				
-				if(leitorLinhas[0].isEmpty()) {
-					data="Data nao informada!";
-				}else if(leitorLinhas[1].isEmpty()) {
-					imgUrl = "Url nao informada!";
-				}else if(leitorLinhas[2].isEmpty()) {
-					codvalidacao="Codigo de Validacao nao informado";
-				}else if(leitorLinhas[3].isEmpty()) {
-					nomeCidade="Nome do municipio nao informado";
-				}
-				else if(leitorLinhas[4].isEmpty()) {
-					descricao=" Descricao do municipio nao informado";
-				}
-				else if(leitorLinhas[5].isEmpty()) {
-					area="Area do municipio nao informado";
-				}
-				else if(leitorLinhas[6].isEmpty()) {
-					latitude="Latitude do municipio nao informado";
-				}
-				else if(leitorLinhas[7].isEmpty()) {
-					longitude="Longitude do municipio nao informado";
-				}
-				else if(leitorLinhas[8].isEmpty()) {
-					estado="Estado do municipio nao informado";
-				}
-				else if(leitorLinhas[9].isEmpty()) {
-					populacao="Populacao do municipio nao informado";
-				}
-				else if(leitorLinhas[10].isEmpty()) {
-					site="Site do municipio nao informado";
-				}else if(leitorLinhas[11].isEmpty()) {
-					inf_relevante="Informacoes Relevantes do municipio nao informado";
-				}
-				else if(leitorLinhas[12].isEmpty()) {
-					email_responsavel="Email do Responsavel pelo preenchimento nao informado";
-				}
-				else if(leitorLinhas[13].isEmpty()) {
-					nome_responsavel="Nome do Responsavel pelo preenchimento nao informado";
-				}
-				else if(leitorLinhas[14].isEmpty()) {
-					contato_responsavel="contato do Responsavel pelo preenchimento nao informado";
-				}
-				else if(leitorLinhas[15].isEmpty()) {
-					fonte_inf="Fonte de informacoes  do municipio nao informado";
-				}
-				else{
-					 data = leitorLinhas[0].trim();
-					 imgUrl= leitorLinhas[1].trim();
-					 codvalidacao = checkCamp(leitorLinhas[2].trim());
-					 nomeCidade = leitorLinhas[3].trim();
-					 descricao = checkCamp(leitorLinhas[4].trim());
-					 area = checkLatLong(leitorLinhas[5].trim());
-					 latitude = checkLatLong(leitorLinhas[6].trim());
-					 longitude = checkLatLong(leitorLinhas[7].trim());
-					 estado = leitorLinhas[8].trim();
-					 populacao = leitorLinhas[9].trim();
-					 site = leitorLinhas[10].trim();
-					 inf_relevante = checkCamp(leitorLinhas[11].trim());
-					 email_responsavel = leitorLinhas[12].trim();
-					 nome_responsavel = leitorLinhas[13].trim();
-					 contato_responsavel = leitorLinhas[14].trim();
-					 fonte_inf = checkCamp(leitorLinhas[15].trim());
 			
+				 data = retireAspas(leitorLinhas[0].trim());
+				 imgUrl=retireAspas(leitorLinhas[1].trim());
+				 codvalidacao = retireAspas(leitorLinhas[2].trim());
+				 nomeCidade = retireAspas(leitorLinhas[3].trim());
+				 descricao = checkCamp(retireAspas(leitorLinhas[4].trim()));
+				 area = String.valueOf(retireAspas(leitorLinhas[5].trim()));
+				 latitude = String.valueOf(retireAspas(leitorLinhas[6].trim()));
+				 longitude = String.valueOf(retireAspas(leitorLinhas[7].trim()));
+				 estado = retireAspas(leitorLinhas[8].trim());
+				 populacao = retireAspas(leitorLinhas[9].trim());
+				 site = retireAspas(leitorLinhas[10]);
+				 inf_relevante = retireAspas(leitorLinhas[11].trim());
+				 email_responsavel = retireAspas(leitorLinhas[12].trim());
+				 nome_responsavel = retireAspas(leitorLinhas[13].trim());
+				 contato_responsavel = retireAspas(leitorLinhas[14].trim());
+				 fonte_inf = retireAspas(leitorLinhas[15].trim());
 		
-					
-					list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
-					
 	
-				}
+				System.err.println(latitude);
+				list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,latitude,longitude,estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
 				
 				
+			
 			}
+				
 		}catch(NumberFormatException e){
-			
-				@SuppressWarnings("deprecation")
-				CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
-				String[] leitorLinhas; 
-				String data = ""; // 0
-				String imgUrl= ""; // 1
-				String codvalidacao = ""; // 2
-				String nomeCidade = ""; // 3
-				String descricao = ""; // 4
-				String area = ""; // 5
-				String latitude = ""; // 6
-				String longitude = ""; // 7
-				String estado = ""; // 8
-				String populacao = ""; // 9
-				String site = ""; // 10
-				String inf_relevante = ""; // 11
-				String email_responsavel = ""; // 12
-				String nome_responsavel = ""; // 13
-				String contato_responsavel = ""; // 14
-				String fonte_inf = ""; // 15
-				
-				while((leitorLinhas=leitor.readNext()) != null){
-				int x = leitorLinhas.length -1;
-				
-				if(leitorLinhas[0].isEmpty()) {
-					data="Data nao informada!";
-				}else if(leitorLinhas[1].isEmpty()) {
-					imgUrl = "Url nao informada!";
-				}else if(leitorLinhas[2].isEmpty()) {
-					codvalidacao="Codigo de Validacao nao informado";
-				}else if(leitorLinhas[3].isEmpty()) {
-					nomeCidade="Nome do municipio nao informado";
-				}
-				else if(leitorLinhas[4].isEmpty()) {
-					descricao=" Descricao do municipio nao informado";
-				}
-				else if(leitorLinhas[5].isEmpty()) {
-					area="Area do municipio nao informado";
-				}
-				else if(leitorLinhas[6].isEmpty()) {
-					latitude="Latitude do municipio nao informado";
-				}
-				else if(leitorLinhas[7].isEmpty()) {
-					longitude="Longitude do municipio nao informado";
-				}
-				else if(leitorLinhas[8].isEmpty()) {
-					estado="Estado do municipio nao informado";
-				}
-				else if(leitorLinhas[9].isEmpty()) {
-					populacao="Populacao do municipio nao informado";
-				}
-				else if(leitorLinhas[10].isEmpty()) {
-					site="Site do municipio nao informado";
-				}else if(leitorLinhas[11].isEmpty()) {
-					inf_relevante="Informacoes Relevantes do municipio nao informado";
-				}
-				else if(leitorLinhas[12].isEmpty()) {
-					email_responsavel="Email do Responsavel pelo preenchimento nao informado";
-				}
-				else if(leitorLinhas[13].isEmpty()) {
-					nome_responsavel="Nome do Responsavel pelo preenchimento nao informado";
-				}
-				else if(leitorLinhas[14].isEmpty()) {
-					contato_responsavel="contato do Responsavel pelo preenchimento nao informado";
-				}
-				else if(leitorLinhas[15].isEmpty()) {
-					fonte_inf="Fonte de informacoes  do municipio nao informado";
-				}
-				else{
-					data = retireAspas(leitorLinhas[0].trim());
-					 imgUrl=retireAspas(leitorLinhas[1].trim());
-					 codvalidacao = retireAspas(leitorLinhas[2].trim());
-					 nomeCidade = retireAspas(leitorLinhas[1].trim());
-					 descricao = checkCamp(retireAspas(leitorLinhas[2].trim()));
-					 area = checkLatLong(retireAspas(leitorLinhas[3].trim()));
-					 latitude = checkLatLong(retireAspas(leitorLinhas[4].trim()));
-					 longitude = checkLatLong(retireAspas(leitorLinhas[5].trim()));
-					 estado = retireAspas(leitorLinhas[6].trim());
-					 populacao = retireAspas(leitorLinhas[7].trim());
-					 site = retireAspas(leitorLinhas[8]);
-					 inf_relevante = checkCamp(retireAspas(leitorLinhas[9].trim()));
-					 email_responsavel = retireAspas(leitorLinhas[10].trim());
-					 nome_responsavel = retireAspas(leitorLinhas[11].trim());
-					 contato_responsavel = retireAspas(leitorLinhas[12].trim());
-					 fonte_inf = checkCamp(retireAspas(leitorLinhas[13].trim()));
-			
-		
-					
-					list_mun.add(new Municipios(data,imgUrl,codvalidacao,nomeCidade,descricao,area,Double.parseDouble(latitude),Double.parseDouble(longitude),estado,Integer.parseInt(populacao),site,inf_relevante, email_responsavel, nome_responsavel , contato_responsavel,fonte_inf));
-					
-					
-				}
-		}
+			e.printStackTrace();
 	}
-		
-		
-		/*
-		 * Cria um txt com os dados que foram inseridos no banco;
-		 */
 		if(list_mun.size() != 0){
 			int tamanhoVetor = list_mun.size();
 			salvaLogs_municipios(list_mun , path_log , tamanhoVetor);
@@ -347,216 +121,73 @@ public class LoaderCSV implements Loggers_z{
 	}
 	
 	public ArrayList<AtrativoTuristico> lerArquivosCSV_AtrativoTuristico(String caminhoCSV, String path) throws IOException{
-		/*
-		 * Indices para AtrativoTuristicos
-		 * 0 = data
-		 * 1 = nome
-		 * 2 = comoChegar
-		 * 3 = descricao
-		 * 4 = info_contato
-		 * 5 = latitude
-		 * 6 = longitude;
-		 * 7 = site;
-		 */
 		try {
-			paths(caminhoCSV);
-			
+			paths(caminhoCSV);	
 			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
 			String[] leitorLinhas;
 			
 			String date = ""; // 0
-			String imgurl = ""; // 1
-			String codValidacao = ""; // 2
-			String nomeAtrativo = ""; // 3
-			String comoChegar = ""; // 4
-			String descricao = ""; // 5
+			String email_responsavel = ""; // 1
+			String nomeAtrativo = ""; // 2
+			String comoChegar = ""; // 3
+			String descricao = ""; // 4
+			String urlImg = "";//5
 			String infContato = ""; // 6
-			double latitude = 0; // 7
-			double longitude = 0; // 8
-			String site = ""; // 9
-			String cidade = ""; // 10
-			String estado = ""; // 11
-			String informacoes_relevantes = ""; // 12
-			String email_responsavel = ""; // 13
-			String nome_responsavel_preenchimento = ""; // 14
-			String contato_responsavel_preenchimento = ""; // 15
-			String fonte_inf = ""; // 16
-			String nome_resp_at = ""; // 17
-			String contato_resp_at = ""; // 18
-			String email_resp_at = ""; // 19
+			String latitude = ""; // 7
+			String longitude = ""; // 8
+			String link_at_maps = ""; // 9
+			String site = ""; // 10
+			String cidade = ""; // 11
+			String estado = ""; // 12
+			String nome_resp_at = ""; // 13
+			String contato_resp_at = ""; // 14
+			String email_resp_at = ""; // 15
+			String inf_relevante = ""; // 16
+			String fonte_inf = ""; // 17
+			String contato_preenchimento = ""; // 18
+			String nome_resp_preenchimento = ""; // 19
+			String cod_validacao_preenchimento = ""; // 20
 			
 			while((leitorLinhas=leitor.readNext())!=null){
-				
-				if(leitorLinhas[0].isEmpty() ){
-					date="Data nao informada!";
-				}else if(leitorLinhas[1].isEmpty()) {
-					imgurl = "Imagem nao informada!";
-				}else if(leitorLinhas[2].isEmpty()) {
-					codValidacao = "Codigo de validacao nao informado!";
-				}else if(leitorLinhas[3].isEmpty()) {
-					nomeAtrativo = "Nome Atrativo nao informado!";
-				}else if(leitorLinhas[4].isEmpty()) {
-					comoChegar = "Como chegar no atrativo nao informado!";
-				}else if(leitorLinhas[5].isEmpty()) {
-					descricao = "Descricao nao informado!";
-				}else if(leitorLinhas[6].isEmpty()) {
-					infContato= "Contato do Atrativo nao informado!";
-				}else if(leitorLinhas[7].isEmpty()) {
-					latitude = 0;
-				}else if(leitorLinhas[8].isEmpty()) {
-					longitude = 0;
-				}else if(leitorLinhas[9].isEmpty()) {
-					site = "Site do Atrativo nao informado!";
-				}else if(leitorLinhas[10].isEmpty()) {
-					cidade = "Cidade do atrativo nao informado!";
-				}else if(leitorLinhas[11].isEmpty()) {
-					estado = "Estado do atrativo nao informado";
-				}else if(leitorLinhas[12].isEmpty()) {
-					informacoes_relevantes = "Informacoes Relevantes nao informado!";
-				}else if(leitorLinhas[13].isEmpty()) {
-					email_responsavel = "Email do Responsavel pelo Atrativo nao informado";
-				}else if(leitorLinhas[14].isEmpty()) {
-					nome_responsavel_preenchimento = "Nome do Responsavel pelo preenchimento nao informado";
-				}else if(leitorLinhas[15].isEmpty()) {
-					contato_responsavel_preenchimento = "Contato do Responsavel pelo preenchimento nao informado";
-				}else if(leitorLinhas[16].isEmpty()) {
-					fonte_inf = "Fonte de informacoes nao informado!";
-				}else if(leitorLinhas[17].isEmpty()) {
-					nome_resp_at = "Nome do Responsavel pelo Atrativo nao informado!";
-				}
-				else if(leitorLinhas[18].isEmpty()) {
-					contato_resp_at = "Contato do responsavel pelo Atrativo nao informado!";
-				}else if(leitorLinhas[19].isEmpty()) {
-					email_resp_at = "Email do Responsavel pelo Atrativo nao informado!";
-				}
-				else{
-						 date = leitorLinhas[0].trim();
-						 imgurl = leitorLinhas[1].trim();
-						codValidacao = leitorLinhas[1].trim();
-						 nomeAtrativo = leitorLinhas[2].trim();
-						 comoChegar = leitorLinhas[3].trim();
-						 descricao = leitorLinhas[4].trim();
-						infContato = leitorLinhas[5].trim();
-						 latitude = Double.parseDouble(leitorLinhas[6].trim());
-						 longitude = Double.parseDouble(leitorLinhas[7].trim());
-						 site = leitorLinhas[8].trim();
-						cidade = leitorLinhas[9].trim();
-						 estado = leitorLinhas[10].trim();
-						 informacoes_relevantes = leitorLinhas[11].trim();
-						 email_responsavel = leitorLinhas[12].trim();
-						 nome_responsavel_preenchimento = leitorLinhas[13].trim();
-						 contato_responsavel_preenchimento = leitorLinhas[14].trim();
-						fonte_inf = leitorLinhas[15].trim();
-						 nome_resp_at = leitorLinhas[16].trim();
-						contato_resp_at = leitorLinhas[17].trim();
-						 email_resp_at = leitorLinhas[18].trim();
+					date = retireAspas(leitorLinhas[0].trim()); // 0
+					 email_responsavel = retireAspas(leitorLinhas[1].trim()); // 1
+					nomeAtrativo = retireAspas(leitorLinhas[2].trim()); // 2
+					comoChegar = retireAspas(leitorLinhas[3].trim()); // 3
+					 descricao = retireAspas(leitorLinhas[4].trim()); // 4
+					 urlImg = retireAspas(leitorLinhas[5].trim()); //5
+					 infContato = retireAspas(leitorLinhas[6].trim()); // 6
+					 latitude = retireAspas(leitorLinhas[7].trim()); // 7
+					longitude = retireAspas(leitorLinhas[8].trim()); // 8
+					 link_at_maps = retireAspas(leitorLinhas[9].trim()); // 9
+					 site = retireAspas(leitorLinhas[10].trim()); // 10
+					 cidade = retireAspas(leitorLinhas[11].trim()); // 11
+					estado = retireAspas(leitorLinhas[12].trim()); // 12
+					 nome_resp_at = retireAspas(leitorLinhas[13].trim()); // 13
+					contato_resp_at = retireAspas(leitorLinhas[14].trim()); // 14
+					 email_resp_at = retireAspas(leitorLinhas[15].trim()); // 15
+					 inf_relevante = retireAspas(leitorLinhas[16].trim());// 16
+					 fonte_inf = retireAspas(leitorLinhas[17].trim()); // 17
+					contato_preenchimento = retireAspas(leitorLinhas[18].trim()); // 18
+					 nome_resp_preenchimento = retireAspas(leitorLinhas[19].trim()); // 19
+					cod_validacao_preenchimento = retireAspas(leitorLinhas[20].trim()); // 20
 					
-					list_atrativos.add(new AtrativoTuristico(date,imgurl,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
-							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
-							email_resp_at));
+					list_atrativos.add(
+							new AtrativoTuristico(
+							date,email_responsavel,nomeAtrativo,
+							comoChegar,descricao,urlImg,
+							infContato,latitude,longitude,
+							link_at_maps,site,cidade
+							,estado,nome_resp_at,contato_resp_at,
+							email_resp_at,inf_relevante,
+							fonte_inf,contato_preenchimento,nome_resp_preenchimento,
+							cod_validacao_preenchimento
+							)
+							);
 					
-				}
-				
-			}
-		}catch(NumberFormatException e){
+				}		
 			
-			
-			CSVReader leitor = new CSVReader(new FileReader(caminhoCSV),',', '\t',1);
-			String[] leitorLinhas;
-			String date = ""; // 0
-			String imgurl = ""; // 1
-			String codValidacao = ""; // 2
-			String nomeAtrativo = ""; // 3
-			String comoChegar = ""; // 4
-			String descricao = ""; // 5
-			String infContato = ""; // 6
-			double latitude = 0; // 7
-			double longitude = 0; // 8
-			String site = ""; // 9
-			String cidade = ""; // 10
-			String estado = ""; // 11
-			String informacoes_relevantes = ""; // 12
-			String email_responsavel = ""; // 13
-			String nome_responsavel_preenchimento = ""; // 14
-			String contato_responsavel_preenchimento = ""; // 15
-			String fonte_inf = ""; // 16
-			String nome_resp_at = ""; // 17
-			String contato_resp_at = ""; // 18
-			String email_resp_at = ""; // 19
-			
-			while((leitorLinhas=leitor.readNext())!=null){
-				if(leitorLinhas[0].isEmpty() ){
-					date="Data nao informada!";
-				}else if(leitorLinhas[1].isEmpty()) {
-					imgurl = "Imagem nao informada!";
-				}else if(leitorLinhas[2].isEmpty()) {
-					codValidacao = "Codigo de validacao nao informado!";
-				}else if(leitorLinhas[3].isEmpty()) {
-					nomeAtrativo = "Nome Atrativo nao informado!";
-				}else if(leitorLinhas[4].isEmpty()) {
-					comoChegar = "Como chegar no atrativo nao informado!";
-				}else if(leitorLinhas[5].isEmpty()) {
-					descricao = "Descricao nao informado!";
-				}else if(leitorLinhas[6].isEmpty()) {
-					infContato= "Contato do Atrativo nao informado!";
-				}else if(leitorLinhas[7].isEmpty()) {
-					latitude = 0;
-				}else if(leitorLinhas[8].isEmpty()) {
-					longitude = 0;
-				}else if(leitorLinhas[9].isEmpty()) {
-					site = "Site do Atrativo nao informado!";
-				}else if(leitorLinhas[10].isEmpty()) {
-					cidade = "Cidade do atrativo nao informado!";
-				}else if(leitorLinhas[11].isEmpty()) {
-					estado = "Estado do atrativo nao informado";
-				}else if(leitorLinhas[12].isEmpty()) {
-					informacoes_relevantes = "Informacoes Relevantes nao informado!";
-				}else if(leitorLinhas[13].isEmpty()) {
-					email_responsavel = "Email do Responsavel pelo Atrativo nao informado";
-				}else if(leitorLinhas[14].isEmpty()) {
-					nome_responsavel_preenchimento = "Nome do Responsavel pelo preenchimento nao informado";
-				}else if(leitorLinhas[15].isEmpty()) {
-					contato_responsavel_preenchimento = "Contato do Responsavel pelo preenchimento nao informado";
-				}else if(leitorLinhas[16].isEmpty()) {
-					fonte_inf = "Fonte de informacoes nao informado!";
-				}else if(leitorLinhas[17].isEmpty()) {
-					nome_resp_at = "Nome do Responsavel pelo Atrativo nao informado!";
-				}
-				else if(leitorLinhas[18].isEmpty()) {
-					contato_resp_at = "Contato do responsavel pelo Atrativo nao informado!";
-				}else if(leitorLinhas[19].isEmpty()) {
-					email_resp_at = "Email do Responsavel pelo Atrativo nao informado!";
-				}else{
-						date = retireAspas(leitorLinhas[0].trim());
-						 imgurl = retireAspas(leitorLinhas[1].trim());
-						 codValidacao =  retireAspas(leitorLinhas[2].trim());
-						 nomeAtrativo =  retireAspas(leitorLinhas[3].trim());
-						comoChegar =  retireAspas(leitorLinhas[4].trim());
-						descricao =  checkCamp(retireAspas(leitorLinhas[5].trim()));
-						 infContato =  retireAspas(leitorLinhas[6].trim());
-						 latitude = Double.parseDouble( retireAspas(leitorLinhas[7].trim()));
-						 longitude = Double.parseDouble( retireAspas(leitorLinhas[8].trim()));
-						 site =  retireAspas(leitorLinhas[9].trim());
-						 cidade =  retireAspas(leitorLinhas[10].trim());
-						 estado =  retireAspas(leitorLinhas[11].trim());
-						 informacoes_relevantes =  retireAspas(leitorLinhas[12].trim());
-						 email_responsavel =  retireAspas(leitorLinhas[13].trim());
-						 nome_responsavel_preenchimento =  retireAspas(leitorLinhas[14].trim());
-						 contato_responsavel_preenchimento =  retireAspas(leitorLinhas[15].trim());
-						//System.err.println("XDXDXD?" + contato_responsavel_preenchimento);
-						 fonte_inf =  retireAspas(leitorLinhas[16].trim());
-						 nome_resp_at =  retireAspas(leitorLinhas[17].trim());
-						 contato_resp_at =  retireAspas(leitorLinhas[18].trim());
-						 email_resp_at =  retireAspas(leitorLinhas[19].trim());
-					
-					list_atrativos.add(new AtrativoTuristico(date,imgurl,codValidacao,nomeAtrativo,comoChegar,descricao,infContato,latitude,longitude,site,cidade,estado,informacoes_relevantes,
-							email_responsavel,nome_responsavel_preenchimento,contato_responsavel_preenchimento,fonte_inf,nome_resp_at,contato_resp_at,
-							email_resp_at));
-					
-				}
-				
-			}
-			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		if(list_atrativos.size() != 0){
 			int tamanhoVetor = list_atrativos.size();
@@ -565,71 +196,9 @@ public class LoaderCSV implements Loggers_z{
 		}
 		return list_atrativos;
 	}
-	
-	
-	public void salvarLogs_praias(ArrayList<Praia> list , String caminhoCSV){
-		
-		try {
-			// File file = new
-	
-			File file = new File("Praias.txt"); // quebra de linha \r\n
-			String dados_turismo = "";
-			String conteudo;
-			String saidacorretaTubarao;
-			String saidacorretaBanho;
-			if(file!=null){
-				System.out.println("Arquivo criado");
-			}
-
-			FileWriter arq = new FileWriter(file);
-			arq.write("--------------- RelatÃ³rio de Praias Salvos pelo Sistema ---------------------");
-			arq.write("\r\n");
-			for (int i = 0; i < list.size(); i++) {
-
-				if(list.get(i).getPerigoTubarao()){
-					saidacorretaTubarao="sim";
-				}else{
-					saidacorretaTubarao="nÃ£o";
-				}
-				if(list.get(i).getPropiaBanho()){
-					saidacorretaBanho="sim";
-				}else{
-					saidacorretaBanho="nÃ£o";
-				}
-				dados_turismo = "Nome: " + list.get(i).getNome() + "\r\n" + "Como chegar: " + list.get(i).getComochegar()
-						+ "\r\n" + "Descricao: " + list.get(i).getDescricao() + "\r\n" + "Latitude: " + list.get(i).getLatitude()
-						+ "\r\n" + "Longitude: " + list.get(i).getLongitude() + "\r\n" + "Infomacaoo Contato: " + list.get(i).getInfo_contato() + "\r\n" +
-						"\r\n" + "Perigo Tubarao: " + saidacorretaTubarao +  "\r\n"+"Propria para banho?: " +saidacorretaBanho +"\r\n "+ "TIPO DA ORLA: "+list.get(i).getTipoOrla()  +"\r\n" + "----------------------------------------------------------------------------------------------------------------" + "\r\n";
-				
-				arq.write("\r\n");
-				conteudo = dados_turismo;
-				conteudo += "\r\n";
-
-				arq.write(conteudo);
-
-			}
-			arq.write("\r\n");
-			arq.write("Armazenados com sucesso!");
-			arq.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			}
-		
-	}
 	public void salvarLogs_turisticos(ArrayList<AtrativoTuristico> list, String caminhoCSV , int tamanhoVETOR){
 		try {
-			// File file = new
-			/*
-			 * SALVA OS DADOS ARMAZENADOS EM UM ARQUIVO TXT QUE SERVE COMO REGISTRO DA OPERAÃ‡ÃƒO.
-			 */
-			
-			
-			//
-			
-			
-			
-			
+
 			File file = new File(caminhoCSV+"/"+"LOG_ATRATIVOS_TURISTICOS.txt"); // quebra de linha \r\n
 			String dados_turismo = "";
 			String conteudo;
@@ -735,26 +304,19 @@ public class LoaderCSV implements Loggers_z{
 		return aux;
 	}
 	
-	public String checkLatLong(String lat) {
-		/*
-		 * trata os campos de populacao,lattitude e longitude
-		 * caso o usuario digite virgula
-		 * exemplo 1 populacao: 44,444
-		 * exemplo 2 latitude; -4,389230
-		 * exemplo 3 longitude: 47,1723923
-		 * 
-		 */
 	
+	public String checkLatLong(String lat) {
 		String normal = lat;
 		String[] saida = lat.split(",");
 		if(saida.length>1) {
 			String op = saida[0]+"."+saida[1];
-			//System.out.println(op);
 			return op;
 		}
 		return normal;
-		
-		
+	}
+	
+	public String retireVirgulas(String string) {
+		return string.replace(",", ".");
 	}
 	
 	public String retireAspas(String string) throws NullPointerException {
